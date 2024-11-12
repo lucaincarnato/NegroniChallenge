@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		210E2CBB2CE3DED500C046C2 /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 210E2CBA2CE3DED500C046C2 /* MCEmojiPicker */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		42E75E822CD8EC22006B36F7 /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				210E2CBB2CE3DED500C046C2 /* MCEmojiPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = NegroniChallenge;
 			packageProductDependencies = (
+				210E2CBA2CE3DED500C046C2 /* MCEmojiPicker */,
 			);
 			productName = NegroniChallenge;
 			productReference = 42E75E822CD8EC22006B36F7 /* NegroniChallenge.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 42E75E792CD8EC22006B36F7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				210E2CB92CE3DED500C046C2 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 42E75E832CD8EC22006B36F7 /* Products */;
 			projectDirPath = "";
@@ -330,6 +339,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		210E2CB92CE3DED500C046C2 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		210E2CBA2CE3DED500C046C2 /* MCEmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 210E2CB92CE3DED500C046C2 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
+			productName = MCEmojiPicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42E75E7A2CD8EC22006B36F7 /* Project object */;
 }
