@@ -27,6 +27,7 @@ struct HomeView: View {
                 .padding()
             }
             .navigationTitle("Home")
+            // Toolbar for the add button
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
                     Button("Add") {
