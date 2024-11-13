@@ -11,9 +11,6 @@ struct ContentView: View {
     var body: some View {
         // TabBar with Sidebar option to display main sections of the app
         TabView{
-            Tab("Editing", systemImage: "pencil") {
-                EditView()
-            }
             Tab("Home", systemImage: "house"){
                 HomeView()
             }

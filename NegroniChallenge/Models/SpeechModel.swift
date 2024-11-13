@@ -1,15 +1,17 @@
 //
-//  EditSpeechView.swift
+//  Speech.swift
 //  NegroniChallenge
 //
 //  Created by Jesus Sebastian Jaime Oviedo on 12/11/24.
 //
 
 import Foundation
+import SwiftUI
 
-class SpeechModel {
-    var speeches: [Speech] = [
-        Speech(title: "Jola", duration: "5:00", instructions: "You should take everything", notes: "Remember to drink")
-    ]
-    
+struct SpeechModel: Identifiable {
+    var id: UUID = UUID()
+    var title: String
+    var duration: String
+    var instructions: String
+    var notes: String
 }
