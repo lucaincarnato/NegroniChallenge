@@ -8,36 +8,33 @@
 import SwiftUI
 
 struct CardView: View {
-    var speechTitle: String
-    var dateOfPlay: String
-    var numberOfPeople: Int
-    var color: Color
+    var actualSpeech: SpeechModel // Speech associated with the card
     
     var body: some View {
         ZStack{
             // Info
             VStack{
-                Text(speechTitle)
+                Text(actualSpeech.speechTitle)
                     .bold()
-                    .font(.largeTitle)
-                    .padding([.bottom], 5)
-                Text(dateOfPlay)
+                    .font(.title2)
+                    .frame(maxWidth: 100, maxHeight: 100, alignment: .center)
+                Text(actualSpeech.dateOfPlay)
                 HStack{
                     Image(systemName: "person.fill")
-                    Text("\(numberOfPeople)")
+                    Text("\(actualSpeech.numberOfPeople)")
                 }
                 .padding([.top], 5)
             }
             // Background
             RoundedRectangle(cornerRadius:15)
-                .foregroundColor(color)
+                .foregroundColor(actualSpeech.cardColor)
                 .opacity(0.5)
                 .padding(10)
         }
-        .frame( height: 200) // The height is fixed, the width depends on the device
+        .frame(height: 250) // The height is fixed, the width depends on the device
     }
 }
 
 #Preview {
-    CardView(speechTitle: "Benigni", dateOfPlay: "13/11/24", numberOfPeople: 8, color: .red)
+    CardView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: "31/02/2025", hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""))
 }
