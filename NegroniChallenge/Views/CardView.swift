@@ -17,8 +17,10 @@ struct CardView: View {
                 Text(actualSpeech.speechTitle)
                     .bold()
                     .font(.title2)
-                    .frame(maxWidth: 100, maxHeight: 100, alignment: .center)
-                Text(actualSpeech.dateOfPlay)
+                    .frame(maxHeight: 100, alignment: .center)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 20)
+                Text(actualSpeech.dateOfPlay.formatted(date: .numeric, time: .shortened))
                 HStack{
                     Image(systemName: "person.fill")
                     Text("\(actualSpeech.numberOfPeople)")
@@ -36,5 +38,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: "31/02/2025", hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""))
+    CardView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: Date.now, hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""))
 }
