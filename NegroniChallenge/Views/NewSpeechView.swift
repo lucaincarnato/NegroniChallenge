@@ -15,7 +15,7 @@ import SwiftUI
 
 struct NewSpeechView: View {
     // Speech speech starting point
-    @State var actualSpeech: SpeechModel = SpeechModel(speechTitle: "", dateOfPlay: "", hourDuration: 0, minuteDuration: 0, secondDuration: 0, numberOfPeople: 1, instructions: "", additionalNotes: "")
+    @State var actualSpeech: SpeechModel = SpeechModel(speechTitle: "", dateOfPlay: Date.now, hourDuration: 0, minuteDuration: 0, secondDuration: 0, numberOfPeople: 1, instructions: "", additionalNotes: "")
     @Binding var showModal: Bool
     @State var cannotSave: Bool = false
     var add: (_ speech: SpeechModel) -> Void
@@ -35,7 +35,7 @@ struct NewSpeechView: View {
                 // Duration (in h/min/sec) and number of people selection
                 Section {
                     LabeledContent("Date") {
-                        DatePicker("Date", selection: $actualSpeech.dateOfPlay)
+                        DatePicker("", selection: $actualSpeech.dateOfPlay)
                             .datePickerStyle(.compact)
                     }
                     LabeledContent("Duration") {
@@ -80,6 +80,7 @@ struct NewSpeechView: View {
             .navigationTitle("New Speech")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
+                    Button("Next") {
                         if(actualSpeech.speechTitle != ""){
                             add(actualSpeech)
                         } else {
@@ -89,7 +90,6 @@ struct NewSpeechView: View {
                     .alert("Insert a name before saving", isPresented: $cannotSave) {
                         Button("OK", role: .cancel) {
                             cannotSave.toggle()
-                        }
                         }
                     }
                 }
@@ -103,5 +103,6 @@ struct NewSpeechView: View {
     }
 }
 
-
-NewSpeechView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: "31/02/2025", hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""), showModal: .constant(true), add: {speech in })
+#Preview{
+    NewSpeechView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: Date.now, hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""), showModal: .constant(true), add: {speech in })
+}

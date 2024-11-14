@@ -34,7 +34,7 @@ struct HomeView: View {
             .navigationTitle("Home")
             //modal to speechView
             .sheet(isPresented: $showModal, content: {
-                NewSpeechView(showModal: $showModal)
+                NewSpeechView(showModal: $showModal, add: {speech in })
             })
             // Toolbar for the add button
             .toolbar {
