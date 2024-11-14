@@ -24,6 +24,9 @@ struct ContentView: View {
                     Text("This is the blog page")
                }
             }
+            Tab("old", systemImage: "house"){
+                TextSpeechView()
+            }
             .defaultVisibility(.hidden, for: .tabBar)
             // Hides the Section from the TabBar but not from the Sidebar
         }
