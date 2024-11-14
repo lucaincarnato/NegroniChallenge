@@ -15,6 +15,8 @@ import SwiftUI
 
 struct NewSpeechView: View {
     @State var actualSpeech: SpeechModel
+    @State var cannotSave: Bool = false
+    var add: (_ speech: SpeechModel) -> Void
     
     var body: some View {
         NavigationStack {
@@ -31,12 +33,10 @@ struct NewSpeechView: View {
                 }
                 // Duration (in h/min/sec) and number of people selection
                 Section {
-                    /*
                     LabeledContent("Date") {
                         DatePicker("Date", selection: $actualSpeech.dateOfPlay)
                             .datePickerStyle(.compact)
                     }
-                     */
                     LabeledContent("Duration") {
                         Picker("Hours", selection: $actualSpeech.hourDuration){
                             ForEach(0..<24) {
@@ -80,7 +80,16 @@ struct NewSpeechView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Next") {
-                        print("Pressed")
+                        if(actualSpeech.speechTitle != ""){
+                            add(actualSpeech)
+                        } else {
+                            cannotSave.toggle()
+                        }
+                    }
+                    .alert("Insert a name before saving", isPresented: $cannotSave) {
+                        Button("OK", role: .cancel) {
+                            cannotSave.toggle()
+                        }
                     }
                 }
                 ToolbarItem(placement: .topBarLeading) {
@@ -95,5 +104,5 @@ struct NewSpeechView: View {
 
 
 #Preview {
-    NewSpeechView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: "31/02/2025", hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""))
+    NewSpeechView(actualSpeech: SpeechModel(speechTitle: "", cardColor: .blue, dateOfPlay: Date.now, hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""), add: {speech in })
 }
