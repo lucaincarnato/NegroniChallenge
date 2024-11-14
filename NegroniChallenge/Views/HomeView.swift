@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     // Data set got from the environment (in ContentView)
     @Environment(SpeechViewModel.self) var speechesVM
+    @State private var showModal = false
     // Information about the four columns of the LazyVGrid
     let columns = [
         GridItem(.flexible()),
@@ -31,11 +32,17 @@ struct HomeView: View {
                 .padding()
             }
             .navigationTitle("Home")
+            //modal to speechView
+            .sheet(isPresented: $showModal, content: {
+                NewSpeechView(showModal: $showModal)
+            })
             // Toolbar for the add button
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing){
-                    Button("Add") {
-                        print("ADDEDD")
+                ToolbarItem {
+                    Button {
+                        showModal.toggle()
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
             }

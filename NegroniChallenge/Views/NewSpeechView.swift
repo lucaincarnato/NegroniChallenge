@@ -14,7 +14,9 @@
 import SwiftUI
 
 struct NewSpeechView: View {
-    @State var actualSpeech: SpeechModel
+    // Speech speech starting point
+    @State var actualSpeech: SpeechModel = SpeechModel(speechTitle: "", dateOfPlay: "", hourDuration: 0, minuteDuration: 0, secondDuration: 0, numberOfPeople: 1, instructions: "", additionalNotes: "")
+    @Binding var showModal: Bool
     
     var body: some View {
         NavigationStack {
@@ -85,7 +87,7 @@ struct NewSpeechView: View {
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
-                        print("Pressed")
+                        showModal.toggle()
                     }
                 }
             }
@@ -95,5 +97,5 @@ struct NewSpeechView: View {
 
 
 #Preview {
-    NewSpeechView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: "31/02/2025", hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""))
+    NewSpeechView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: "31/02/2025", hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""), showModal: .constant(true))
 }
