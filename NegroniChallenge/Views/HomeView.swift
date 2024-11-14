@@ -8,21 +8,25 @@
 import SwiftUI
 
 struct HomeView: View {
+    // Data set got from the environment (in ContentView)
+    @Environment(SpeechViewModel.self) var speechesVM
+    // Information about the four columns of the LazyVGrid
     let columns = [
-        GridItem(.adaptive(minimum:150 , maximum:200)),
-        GridItem(.adaptive(minimum:150 , maximum:200)),
-        GridItem(.adaptive(minimum:150 , maximum:200)),
-        GridItem(.adaptive(minimum:150 , maximum:200))
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
     ]
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 // Four columns from columns array for the grid
-                LazyVGrid(columns: columns, spacing: 50) {
-                    // Card for the single speech
-                    // For future: it is a button and needs to be iterated
-                    CardView(speechTitle: "Benigni", dateOfPlay: "31/12/2024", numberOfPeople: 8, color: .red)
+                LazyVGrid(columns: columns, spacing: 30) {
+                    // Set of cards for the single speeches
+                    ForEach(speechesVM.data) { speech in
+                        CardView(actualSpeech: speech)
+                    }
                 }
                 .padding()
             }
@@ -41,4 +45,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(SpeechViewModel())
 }
