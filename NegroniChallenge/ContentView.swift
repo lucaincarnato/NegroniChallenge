@@ -24,28 +24,9 @@ struct ContentView: View {
                 ForEach(speechesVM.data) { speech in
                     // Looks into the data array to show all the speeches in the sidebar
                     Tab(speech.speechTitle, systemImage: ""){
-                        TextSpeechView(text:
-                            """
-                            Luca oggi è alto
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Alice domani sarà bassa
-                            Luca oggi è alto
-                            """
-                        )
+                        TextSpeechView(actualSpeech: speech)
                     }
                 }
-            }
-            Tab("old", systemImage: "house"){
-                TextSpeechView()
             }
             .defaultVisibility(.hidden, for: .tabBar)
             // Hides the Section from the TabBar but not from the Sidebar

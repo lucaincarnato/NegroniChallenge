@@ -15,7 +15,28 @@ import SwiftUI
 
 struct NewSpeechView: View {
     // Speech speech starting point
-    @State var actualSpeech: SpeechModel = SpeechModel(speechTitle: "", dateOfPlay: Date.now, hourDuration: 0, minuteDuration: 0, secondDuration: 0, numberOfPeople: 1, instructions: "", additionalNotes: "")
+    @State var actualSpeech: SpeechModel = SpeechModel(
+        speechTitle: "Poesia per Natale",
+        cardColor: .blue,
+        dateOfPlay: Date.now,
+        hourDuration: 0,
+        minuteDuration: 0,
+        secondDuration: 40,
+        speechText: """
+        Se ni’ mondo esistesse un po’ di bene
+        e ognun si honsiderasse suo fratello
+        ci sarebbe meno pensieri e meno pene
+        e il mondo ne sarebbe assai più bello
+        """,
+        previousRecordings: [
+            RecordingModel(title: "Recording1", duration: "10"),
+            RecordingModel(title: "Recording1", duration: "10"),
+            RecordingModel(title: "Recording1", duration: "10")
+        ],
+        numberOfPeople: 2,
+        instructions: "Be expressive",
+        additionalNotes: ""
+    )
     @Binding var showModal: Bool
     @State var cannotSave: Bool = false
     var add: (_ speech: SpeechModel) -> Void
@@ -107,5 +128,26 @@ struct NewSpeechView: View {
 }
 
 #Preview{
-    NewSpeechView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: Date.now, hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""), showModal: .constant(true), add: {speech in })
+    NewSpeechView(actualSpeech: SpeechModel(
+        speechTitle: "Poesia per Natale",
+        cardColor: .blue,
+        dateOfPlay: Date.now,
+        hourDuration: 0,
+        minuteDuration: 0,
+        secondDuration: 40,
+        speechText: """
+        Se ni’ mondo esistesse un po’ di bene
+        e ognun si honsiderasse suo fratello
+        ci sarebbe meno pensieri e meno pene
+        e il mondo ne sarebbe assai più bello
+        """,
+        previousRecordings: [
+            RecordingModel(title: "Recording1", duration: "10"),
+            RecordingModel(title: "Recording1", duration: "10"),
+            RecordingModel(title: "Recording1", duration: "10")
+        ],
+        numberOfPeople: 2,
+        instructions: "Be expressive",
+        additionalNotes: ""
+    ),showModal: .constant(true), add: {speech in })
 }

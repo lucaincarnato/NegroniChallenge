@@ -26,23 +26,29 @@ struct SearchView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView{
-                // If the search returns no item, it is shown a "no founds" texts
-                if filteredSpeech.isEmpty && !searchText.isEmpty {
-                    Text("No speech found")
-                        .font(.subheadline)
-                        .padding()
-                        .foregroundStyle(.gray)
-                // If the search returns an array of items, it shows it
-                } else {
-                    // Four columns from columns array for the grid
-                    LazyVGrid(columns: columns, spacing: 30) {
-                        // Card for the single speech
-                        ForEach(filteredSpeech){ speech in
-                            CardView(actualSpeech: speech)
+            ZStack {
+                // Background color
+                Color.gray
+                    .opacity(0.1)
+                    .ignoresSafeArea()
+                ScrollView{
+                    // If the search returns no item, it is shown a "no founds" texts
+                    if filteredSpeech.isEmpty && !searchText.isEmpty {
+                        Text("No speech found")
+                            .font(.subheadline)
+                            .padding()
+                            .foregroundStyle(.gray)
+                        // If the search returns an array of items, it shows it
+                    } else {
+                        // Four columns from columns array for the grid
+                        LazyVGrid(columns: columns, spacing: 30) {
+                            // Card for the single speech
+                            ForEach(filteredSpeech){ speech in
+                                CardView(actualSpeech: speech)
+                            }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
             }
             .navigationTitle("Search")
@@ -51,6 +57,7 @@ struct SearchView: View {
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
     }
 }
+
 #Preview {
     SearchView()
         .environment(SpeechViewModel())

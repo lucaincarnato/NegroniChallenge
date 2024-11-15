@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct RecordingModel: Identifiable {
-    let id: UUID
+    let id: UUID = UUID()
     let title: String
-    let duration: String
+    let duration: String // This should not be a string but we'll wait till we know how it is registered in memory
 }
 
 
