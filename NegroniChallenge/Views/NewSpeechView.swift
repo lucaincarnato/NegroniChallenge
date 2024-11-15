@@ -78,21 +78,24 @@ struct NewSpeechView: View {
                 }
             }
             .navigationTitle("New Speech")
+            // Checks for changes and validates input, then add; otherwise it shows an alert
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Next") {
-                        if(actualSpeech.speechTitle != ""){
+                        // Adds only if the title is not empty and if the date is not on the past
+                        if(actualSpeech.speechTitle != "" && actualSpeech.dateOfPlay > Date.now){
                             add(actualSpeech)
                         } else {
                             cannotSave.toggle()
                         }
                     }
-                    .alert("Insert a name before saving", isPresented: $cannotSave) {
+                    .alert("Something \nwent wrong", isPresented: $cannotSave) {
                         Button("OK", role: .cancel) {
                             cannotSave.toggle()
                         }
                     }
                 }
+                // Shows action sheet if there's been changes
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
                         showModal.toggle()

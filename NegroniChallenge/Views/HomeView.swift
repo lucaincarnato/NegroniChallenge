@@ -48,6 +48,8 @@ struct HomeView: View {
                         } label: {
                             CardView(actualSpeech: speech)
                         }
+                        // Michele was right, there's an overlay removed by this modifier
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
                 .padding()
@@ -55,7 +57,7 @@ struct HomeView: View {
             .navigationTitle("Home")
             //modal to speechView
             .sheet(isPresented: $showModal, content: {
-                NewSpeechView(showModal: $showModal, add: {speech in })
+                NewSpeechView(showModal: $showModal, add: speechesVM.addSpeech (_:))
             })
             // Toolbar for the add button
             .toolbar {
