@@ -24,7 +24,23 @@ struct ContentView: View {
                 ForEach(speechesVM.data) { speech in
                     // Looks into the data array to show all the speeches in the sidebar
                     Tab(speech.speechTitle, systemImage: ""){
-                        CardView(actualSpeech: speech)
+                        TextSpeechView(text:
+                            """
+                            Luca oggi è alto
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Alice domani sarà bassa
+                            Luca oggi è alto
+                            """
+                        )
                     }
                 }
             }
