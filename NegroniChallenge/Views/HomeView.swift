@@ -26,7 +26,28 @@ struct HomeView: View {
                 LazyVGrid(columns: columns, spacing: 30) {
                     // Set of cards for the single speeches
                     ForEach(speechesVM.data) { speech in
-                        CardView(actualSpeech: speech)
+                        // Card to Speech navigation
+                        NavigationLink{
+                            TextSpeechView(text:
+                                """
+                                Luca oggi è alto
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Alice domani sarà bassa
+                                Luca oggi è alto
+                                """
+                            )
+                        } label: {
+                            CardView(actualSpeech: speech)
+                        }
                     }
                 }
                 .padding()
