@@ -117,7 +117,7 @@ struct NewSpeechView: View {
                     }
                 }
                 // Shows action sheet if there's been changes
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         showModal.toggle()
                     }

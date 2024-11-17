@@ -35,7 +35,7 @@ struct HomeView: View {
                             NavigationLink{
                                 TextSpeechView(actualSpeech: speech)
                             } label: {
-                                CardView(actualSpeech: speech)
+                                CardView(actualSpeech: speech, remove: speechesVM.removeSpeech)
                             }
                             // Michele was right, there's an overlay removed by this modifier
                             .buttonStyle(PlainButtonStyle())

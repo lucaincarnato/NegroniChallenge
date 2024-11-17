@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CardView: View {
     var actualSpeech: SpeechModel // Speech associated with the card
+    var remove: (_ speech: SpeechModel) -> Void // Function for the deletion, delegated the definition
     
     var body: some View {
         ZStack{
@@ -34,6 +35,19 @@ struct CardView: View {
                 .padding(10)
         }
         .frame(height: 250) // The height is fixed, the width depends on the device
+        // Allow the long press for the deletion and the share
+        .contextMenu {
+            Button (role: .destructive) {
+                remove(actualSpeech)
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+            Button {
+                print("TODO: share of the txt")
+            } label: {
+                Label("Share", systemImage: "square.and.arrow.up")
+            }
+        }
     }
 }
 
@@ -59,5 +73,5 @@ struct CardView: View {
         numberOfPeople: 2,
         instructions: "Be expressive",
         additionalNotes: ""
-    ))
+    ), remove: {speech in })
 }

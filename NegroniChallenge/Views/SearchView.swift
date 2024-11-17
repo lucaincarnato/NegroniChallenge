@@ -44,7 +44,7 @@ struct SearchView: View {
                         LazyVGrid(columns: columns, spacing: 30) {
                             // Card for the single speech
                             ForEach(filteredSpeech){ speech in
-                                CardView(actualSpeech: speech)
+                                CardView(actualSpeech: speech, remove: speechesVM.removeSpeech)
                             }
                         }
                         .padding()
