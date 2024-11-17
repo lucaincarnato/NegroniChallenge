@@ -6,14 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
+
+func randomDate(daysBack: Int = 30) -> Date {
+    let dayOffset = Int.random(in: 0...daysBack)
+    let secondsInDay: TimeInterval = 86400
+    return Date().addingTimeInterval(-secondsInDay * Double(dayOffset))
+}
 
 struct TextSpeechView : View {
+    //copy paste esta linea si hay que extraer las grabaciones
+    var audioRecorder = AudioRecorder()
+    
     @State var text: String = ""
     @State var textActivator: Bool = false
     @State var subtextActivator: Bool = false
     
-    @State var recordingList: [RecordingModel] = [
-        RecordingModel(id: UUID(), title: "Bla bla bla", duration: "10:00"),
+    @State var recordingList: [Recording] = [
+        Recording(id: UUID(), title: "Bla bla bla", fileName:".m4a" , transcript:"ok", createdAt: randomDate())
     ]
     var body: some View {
         NavigationStack {
@@ -34,6 +44,8 @@ struct TextSpeechView : View {
                     .padding(.horizontal, 250)
                 }
                 Section (header: Text ("Recordings")) {
+                    //Separated View
+                    /*
                     List {
                         ForEach(recordingList, id: \.id) { recording in
                             VStack(alignment: .leading) {
@@ -47,9 +59,9 @@ struct TextSpeechView : View {
                         }
                         
                     }
-                    .toolbar {
-                        EditButton()
-                    }
+                     */
+                    
+                    
                 }
                 
                 Button("CIAO"){
@@ -63,6 +75,12 @@ struct TextSpeechView : View {
             .navigationTitle("Text to Speech")
             
         }
+        NavigationStack {
+            RecordingsListView().navigationTitle("Recordings")
+        }.task {
+            audioRecorder.setup()
+        }.environment( audioRecorder)
+        .modelContainer(for : [Recording.self])
     }
 }
 #Preview {
