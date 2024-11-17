@@ -16,7 +16,7 @@ struct RecordButtonView: View {
         ZStack {
             Circle()
                 .stroke(Color.gray, lineWidth: 3)
-                .frame(width: 100, height: 100)
+                .frame(width: 60, height: 60)
             Button(action: {
                 withAnimation(.easeOut(duration: 0.3)) {
                     if !audioRecorder.isRecording {
@@ -50,7 +50,7 @@ struct RecordButtonView: View {
                         .frame(width: 30, height: 50)
                 }else {
                     Image(systemName: "mic.circle.fill")
-                        .font(.system(size: 80))
+                        .font(.system(size: 50))
                         .foregroundStyle(.red)
                 }
             })

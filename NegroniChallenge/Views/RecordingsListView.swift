@@ -46,13 +46,13 @@ struct RecordingsListView: View {
         
         //mic section
         VStack {
-            Spacer()
+            //Spacer()
             VStack (alignment:.center) {
                 RecordButtonView()
             }
             .padding(.bottom,0)
             .frame(maxWidth:.infinity) //it expands
-            .frame(height:120)
+            .frame(height:80)
             .background(Color.clear)
         }
     }

@@ -27,7 +27,8 @@ struct ContentView: View {
                 ForEach(speechesVM.data) { speech in
                     // Looks into the data array to show all the speeches in the sidebar
                     Tab(speech.speechTitle, systemImage: ""){
-                        TextSpeechView(actualSpeech: speech)
+                        // TODO: Correct this issue
+                        //TextSpeechView(actualSpeech: speech)
                     }
                 }
             }

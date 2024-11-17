@@ -40,7 +40,7 @@ struct TextSpeechView : View {
                         ScrollView{
                             // Displays the text only if its toggle is active
                             if(textActivator){
-                                Text(actualSpeech.speechText)
+                                Text("hola") //actualSpeech.speechText
                                     .padding(20)
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
                                     .font(.title)
@@ -70,9 +70,10 @@ struct TextSpeechView : View {
                     }
                     .padding(.horizontal, 250)
                 }
+                /*
                 Section (header: Text ("Recordings")) {
                     //Separated View
-                    /*
+                    
                     List {
                         ForEach(recordingList, id: \.id) { recording in
                             VStack(alignment: .leading) {
@@ -104,25 +105,29 @@ struct TextSpeechView : View {
                     .padding(.vertical, 20)
                     
                 }
-                .navigationTitle(actualSpeech.speechTitle)
+                 */
+                .navigationTitle("example") //actualSpeech.speechTitle
                 // Goes into edit mode
                 .toolbar{
                     ToolbarItem(placement: .navigationBarTrailing){
                         Button("Edit", action: {print("CIAO")})
                     }
+                     
                 }
+                 
             }
+            VStack {
+                RecordingsListView()//.navigationTitle("Recordings")
+            }.task {
+                audioRecorder.setup()
+            }.environment( audioRecorder)
+            .modelContainer(for : [Recording.self])
         }
-        NavigationStack {
-            RecordingsListView().navigationTitle("Recordings")
-        }.task {
-            audioRecorder.setup()
-        }.environment( audioRecorder)
-        .modelContainer(for : [Recording.self])
+        
     }
 }
 
 #Preview {
     TextSpeechView()
 }
-//in riga 61 luca non ci ha aiutato ovviamente <3
+//in riga 61 luca non ci ha aiutato ovviamente

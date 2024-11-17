@@ -30,7 +30,7 @@ struct AudioWaveformView: View {
 
 struct BarView : View {
     var value : CGFloat
-    private let height: CGFloat = 30
+    private let height: CGFloat = 25
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.blue.opacity(value))
