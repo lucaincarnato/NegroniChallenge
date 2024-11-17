@@ -21,28 +21,41 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                // Four columns from columns array for the grid
-                LazyVGrid(columns: columns, spacing: 30) {
-                    // Set of cards for the single speeches
-                    ForEach(speechesVM.data) { speech in
-                        CardView(actualSpeech: speech)
+            ZStack {
+                // Background color
+                Color.gray
+                    .opacity(0.1)
+                    .ignoresSafeArea()
+                ScrollView {
+                    // Four columns from columns array for the grid
+                    LazyVGrid(columns: columns, spacing: 30) {
+                        // Set of cards for the single speeches
+                        ForEach(speechesVM.data) { speech in
+                            // Card to Speech navigation
+                            NavigationLink{
+                                TextSpeechView(actualSpeech: speech)
+                            } label: {
+                                CardView(actualSpeech: speech, remove: speechesVM.removeSpeech)
+                            }
+                            // Michele was right, there's an overlay removed by this modifier
+                            .buttonStyle(PlainButtonStyle())
+                        }
                     }
+                    .padding()
                 }
-                .padding()
-            }
-            .navigationTitle("Home")
-            //modal to speechView
-            .sheet(isPresented: $showModal, content: {
-                NewSpeechView(showModal: $showModal, add: {speech in })
-            })
-            // Toolbar for the add button
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        showModal.toggle()
-                    } label: {
-                        Image(systemName: "plus")
+                .navigationTitle("Home")
+                //modal to speechView
+                .sheet(isPresented: $showModal, content: {
+                    NewSpeechView(showModal: $showModal, add: speechesVM.addSpeech (_:))
+                })
+                // Toolbar for the add button
+                .toolbar {
+                    ToolbarItem {
+                        Button {
+                            showModal.toggle()
+                        } label: {
+                            Image(systemName: "plus")
+                        }
                     }
                 }
             }

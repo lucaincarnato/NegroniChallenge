@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CardView: View {
     var actualSpeech: SpeechModel // Speech associated with the card
+    var remove: (_ speech: SpeechModel) -> Void // Function for the deletion, delegated the definition
     
     var body: some View {
         ZStack{
@@ -34,9 +35,43 @@ struct CardView: View {
                 .padding(10)
         }
         .frame(height: 250) // The height is fixed, the width depends on the device
+        // Allow the long press for the deletion and the share
+        .contextMenu {
+            Button (role: .destructive) {
+                remove(actualSpeech)
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+            Button {
+                print("TODO: share of the txt")
+            } label: {
+                Label("Share", systemImage: "square.and.arrow.up")
+            }
+        }
     }
 }
 
 #Preview {
-    CardView(actualSpeech: SpeechModel(speechTitle: "Amlet", cardColor: .blue, dateOfPlay: Date.now, hourDuration: 1, minuteDuration: 20, secondDuration: 20, numberOfPeople: 2, instructions: "Be expressive", additionalNotes: ""))
+    CardView(actualSpeech: SpeechModel(
+        speechTitle: "Poesia per Natale",
+        cardColor: .blue,
+        dateOfPlay: Date.now,
+        hourDuration: 0,
+        minuteDuration: 0,
+        secondDuration: 40,
+        speechText: """
+        Se ni’ mondo esistesse un po’ di bene
+        e ognun si honsiderasse suo fratello
+        ci sarebbe meno pensieri e meno pene
+        e il mondo ne sarebbe assai più bello
+        """,
+        previousRecordings: [
+            RecordingModel(title: "Recording1", duration: "10"),
+            RecordingModel(title: "Recording1", duration: "10"),
+            RecordingModel(title: "Recording1", duration: "10")
+        ],
+        numberOfPeople: 2,
+        instructions: "Be expressive",
+        additionalNotes: ""
+    ), remove: {speech in })
 }

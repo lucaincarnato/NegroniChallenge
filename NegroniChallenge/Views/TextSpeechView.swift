@@ -27,19 +27,46 @@ struct TextSpeechView : View {
     ]
     var body: some View {
         NavigationStack {
-            Form {
-                Section (header: Text("Enter speech")) {
-                    TextField("bla bla bla", text: $text)
-                        .frame(minHeight : 200, alignment: .topLeading)
-                        .padding([.top],5)
-                }
-                Section (header: Text("Modes")) {
+            ZStack {
+                // Background color
+                Color.gray
+                    .opacity(0.1)
+                    .ignoresSafeArea()
+                VStack{
+                    ZStack {
+                        Rectangle()
+                            .fill(Color.white)
+                            .cornerRadius(15)
+                        ScrollView{
+                            // Displays the text only if its toggle is active
+                            if(textActivator){
+                                Text(actualSpeech.speechText)
+                                    .padding(20)
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    .font(.title)
+                            } else {
+                                Text("Text disabled")
+                                    .foregroundStyle(.gray)
+                                    .padding(20)
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    .font(.title)
+                            }
+                        }
+                    }
+                    .padding()
                     HStack {
+                        Text("With text")
                         Toggle("Text", isOn: $textActivator)
-                            .toggleStyle(.button)
+                            // Uncheck subtext if text is unchecked
+                            .onChange(of: textActivator, initial: true, {subtextActivator = !textActivator ? false : subtextActivator})
+                            .toggleStyle(.switch)
+                            .labelsHidden()
                         Spacer()
+                        Text("With subtext")
                         Toggle("Subtext", isOn: $subtextActivator)
-                            .toggleStyle(.button)
+                            .toggleStyle(.switch)
+                            .labelsHidden()
+                            .disabled(!textActivator) // Disables the toggle if the text one is off
                     }
                     .padding(.horizontal, 250)
                 }
@@ -59,21 +86,32 @@ struct TextSpeechView : View {
                         }
                         
                     }
-                     */
-                    
+                    .scrollContentBackground(.hidden)
+                    // Goes to rehearsal
+                    Button(action: {
+                        print("CIAO")
+                    }, label: {
+                        HStack {
+                            Image(systemName: "play.fill")
+                            Text("PLAY")
+                        }
+                        .padding(.horizontal, 100)
+                    })
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+                    .buttonBorderShape(.capsule)
+                    .tint(.red)
+                    .padding(.vertical, 20)
                     
                 }
-                
-                Button("CIAO"){
-                    
+                .navigationTitle(actualSpeech.speechTitle)
+                // Goes into edit mode
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarTrailing){
+                        Button("Edit", action: {print("CIAO")})
+                    }
                 }
-                .buttonStyle(.bordered)
-                .alignmentGuide(VerticalAlignment.center, computeValue: { $0[.bottom]})
-                
-                
             }
-            .navigationTitle("Text to Speech")
-            
         }
         NavigationStack {
             RecordingsListView().navigationTitle("Recordings")
@@ -83,6 +121,8 @@ struct TextSpeechView : View {
         .modelContainer(for : [Recording.self])
     }
 }
+
 #Preview {
     TextSpeechView()
 }
+//in riga 61 luca non ci ha aiutato ovviamente <3
