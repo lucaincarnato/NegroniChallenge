@@ -38,6 +38,9 @@ struct CardView: View {
         }
         .frame(height: 250) // The height is fixed, the width depends on the device
         // Allow the long press for the deletion and the share
+        .onAppear { // Creates the txt file when the link appears
+            createTextFile()
+        }
         .contextMenu {
             Button (role: .destructive) {
                 remove(actualSpeech)
@@ -48,10 +51,6 @@ struct CardView: View {
                 // ShareLink with the txt file already created
                 ShareLink(item: fileURL, preview: SharePreview("File di testo"))
                     .padding()
-                // Creates the txt file when the link appears
-                .onAppear {
-                    createTextFile()
-                }
             } else {
                 Text("Creazione file in corso...")
             }
