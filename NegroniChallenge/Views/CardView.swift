@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CardView: View {
+    @State private var fileURL: URL? // txt file's URL
+    
     var actualSpeech: SpeechModel // Speech associated with the card
     var remove: (_ speech: SpeechModel) -> Void // Function for the deletion, delegated the definition
     
@@ -42,11 +44,34 @@ struct CardView: View {
             } label: {
                 Label("Delete", systemImage: "trash")
             }
-            Button {
-                print("TODO: share of the txt")
-            } label: {
-                Label("Share", systemImage: "square.and.arrow.up")
+            if let fileURL = fileURL {
+                // ShareLink with the txt file already created
+                ShareLink(item: fileURL, preview: SharePreview("File di testo"))
+                    .padding()
+                // Creates the txt file when the link appears
+                .onAppear {
+                    createTextFile()
+                }
+            } else {
+                Text("Creazione file in corso...")
             }
+        }
+    }
+    
+    // NEED TO BE MOVED INTO VIEWMODEL
+    // It creates the txt file from the actual Speech of the card
+    private func createTextFile() {
+        // Get temporary directory
+        let tempDir = FileManager.default.temporaryDirectory
+        // Define file .txt's path
+        let filePath = tempDir.appendingPathComponent("\(actualSpeech.speechTitle)BlaBlaBla.txt")
+        do {
+            // Writes the text in the file
+            try actualSpeech.speechText.write(to: filePath, atomically: true, encoding: .utf8)
+            // Assign file's URL to state variable
+            self.fileURL = filePath
+        } catch {
+            print("Error while creating the file \(error)")
         }
     }
 }

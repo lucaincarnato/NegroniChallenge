@@ -102,27 +102,45 @@ struct TextSpeechView : View {
                         .headerProminence(.increased)
                     }
                     .scrollContentBackground(.hidden)
-                    // Goes to rehearsal
-                    Button(action: {
-                        print("CIAO")
-                    }, label: {
-                        HStack {
-                            Image(systemName: "play.fill")
-                            Text("PLAY")
-                        }
-                        .padding(.horizontal, 100)
-                    })
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-                    .buttonBorderShape(.capsule)
-                    .tint(.red)
+                    // Buttons for info and start rehearsal
+                    HStack{
+                        // Goes to info
+                        Button(action: {
+                            print("CIAO")
+                        }, label: {
+                            HStack {
+                                Image(systemName: "info.circle")
+                                Text("Speech info")
+                            }
+                            .padding(.horizontal, 40)
+                        })
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                        .buttonBorderShape(.capsule)
+                        .tint(.blue)
+                        .padding(.horizontal, 20)
+                        // Goes to rehearsal
+                        Button(action: {
+                            print("CIAO")
+                        }, label: {
+                            HStack {
+                                Image(systemName: "play.fill")
+                                Text("Rehearse")
+                            }
+                            .padding(.horizontal, 50)
+                        })
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+                        .buttonBorderShape(.capsule)
+                        .tint(.red)
+                        .padding(.horizontal, 20)
+                    }
                     .padding(.vertical, 20)
-                    
                 }
                 .navigationTitle(actualSpeech.speechTitle)
                 // Goes into edit mode
                 .toolbar{
-                    ToolbarItem(placement: .navigationBarTrailing){
+                    ToolbarItem(placement: .topBarTrailing){
                         Button("Edit", action: {print("CIAO")})
                     }
                 }
