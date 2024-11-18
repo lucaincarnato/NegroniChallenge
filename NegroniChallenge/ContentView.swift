@@ -13,6 +13,9 @@ struct ContentView: View {
     var body: some View {
         // TabBar with Sidebar option to display main sections of the app
         TabView{
+            Tab("ok", systemImage: "house") {
+                TextSpeechView()
+            }
             Tab("Home", systemImage: "house"){
                 HomeView()
             }
@@ -24,7 +27,8 @@ struct ContentView: View {
                 ForEach(speechesVM.data) { speech in
                     // Looks into the data array to show all the speeches in the sidebar
                     Tab(speech.speechTitle, systemImage: ""){
-                        TextSpeechView(actualSpeech: speech)
+                        // TODO: Correct this issue
+                        //TextSpeechView(actualSpeech: speech)
                     }
                 }
             }

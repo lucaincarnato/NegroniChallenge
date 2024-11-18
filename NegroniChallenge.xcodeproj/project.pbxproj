@@ -10,9 +10,22 @@
 		42E75E822CD8EC22006B36F7 /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		213930372CEA9A2100403923 /* Exceptions for "NegroniChallenge" folder in "NegroniChallenge" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 42E75E812CD8EC22006B36F7 /* NegroniChallenge */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		42E75E842CD8EC22006B36F7 /* NegroniChallenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				213930372CEA9A2100403923 /* Exceptions for "NegroniChallenge" folder in "NegroniChallenge" target */,
+			);
 			path = NegroniChallenge;
 			sourceTree = "<group>";
 		};
@@ -257,8 +270,10 @@
 				DEVELOPMENT_TEAM = W3B7XH945C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NegroniChallenge/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BlaBlaBla;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Recording audio for app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -292,8 +307,10 @@
 				DEVELOPMENT_TEAM = W3B7XH945C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NegroniChallenge/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BlaBlaBla;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Recording audio for app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

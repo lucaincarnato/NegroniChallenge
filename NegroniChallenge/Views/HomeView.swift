@@ -21,6 +21,8 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
+            Text("repair")
+            /*
             ZStack {
                 // Background color
                 Color.gray
@@ -59,11 +61,14 @@ struct HomeView: View {
                     }
                 }
             }
+             */
         }
+             
     }
+         
 }
 
 #Preview {
     HomeView()
-        .environment(SpeechViewModel())
+        //.environment(SpeechViewModel())
 }

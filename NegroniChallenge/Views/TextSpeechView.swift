@@ -6,40 +6,25 @@
 //
 
 import SwiftUI
+import SwiftData
+
+func randomDate(daysBack: Int = 30) -> Date {
+    let dayOffset = Int.random(in: 0...daysBack)
+    let secondsInDay: TimeInterval = 86400
+    return Date().addingTimeInterval(-secondsInDay * Double(dayOffset))
+}
 
 struct TextSpeechView : View {
-    @State var actualSpeech: SpeechModel = SpeechModel(
-        speechTitle: "Poesia per Natale",
-        cardColor: .blue,
-        dateOfPlay: Date.now,
-        hourDuration: 0,
-        minuteDuration: 0,
-        secondDuration: 40,
-        speechText: """
-            Se ni’ mondo esistesse un po’ di bene
-            e ognun si honsiderasse suo fratello
-            ci sarebbe meno pensieri e meno pene
-            e il mondo ne sarebbe assai più bello
-            """,
-        previousRecordings: [
-            RecordingModel(title: "Recording1", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording3", duration: "10")
-        ],
-        numberOfPeople: 2,
-        instructions: "Be expressive",
-        additionalNotes: ""
-    )
-    // Variables to differentiate the mode of rehearsing
-    @State var textActivator: Bool = true
+    //copy paste esta linea si hay que extraer las grabaciones
+    var audioRecorder = AudioRecorder()
+    
+    @State var text: String = ""
+    @State var textActivator: Bool = false
     @State var subtextActivator: Bool = false
     
+    @State var recordingList: [Recording] = [
+        Recording(id: UUID(), title: "Bla bla bla", fileName:".m4a" , transcript:"ok", createdAt: randomDate())
+    ]
     var body: some View {
         NavigationStack {
             ZStack {
@@ -55,7 +40,7 @@ struct TextSpeechView : View {
                         ScrollView{
                             // Displays the text only if its toggle is active
                             if(textActivator){
-                                Text(actualSpeech.speechText)
+                                Text("hola") //actualSpeech.speechText
                                     .padding(20)
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
                                     .font(.title)
@@ -84,22 +69,23 @@ struct TextSpeechView : View {
                             .disabled(!textActivator) // Disables the toggle if the text one is off
                     }
                     .padding(.horizontal, 250)
-                    List{
-                        Section (header: Text("Previous Rehearsals")){
-                            // Goes into feedback view
-                            ForEach(actualSpeech.previousRecordings, id: \.id) { recording in
-                                VStack(alignment: .leading) {
-                                    Text(recording.title)
-                                    Text(recording.duration)
-                                        .font(.caption)
-                                }
-                            }
-                            // Swipe to delete implementation
-                            .onDelete {
-                                indexSet in actualSpeech.previousRecordings.remove(atOffsets: indexSet)
+                }
+                /*
+                Section (header: Text ("Recordings")) {
+                    //Separated View
+                    
+                    List {
+                        ForEach(recordingList, id: \.id) { recording in
+                            VStack(alignment: .leading) {
+                                Text(recording.title)
+                                Text(recording.duration)
+                                    .font(.caption)
                             }
                         }
-                        .headerProminence(.increased)
+                        .onDelete {
+                            indexSet in recordingList.remove(atOffsets: indexSet)
+                        }
+                        
                     }
                     .scrollContentBackground(.hidden)
                     // Buttons for info and start rehearsal
@@ -137,19 +123,29 @@ struct TextSpeechView : View {
                     }
                     .padding(.vertical, 20)
                 }
-                .navigationTitle(actualSpeech.speechTitle)
+                 */
+                .navigationTitle("example") //actualSpeech.speechTitle
                 // Goes into edit mode
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing){
                         Button("Edit", action: {print("CIAO")})
                     }
+                     
                 }
+                 
             }
+            VStack {
+                RecordingsListView()//.navigationTitle("Recordings")
+            }.task {
+                audioRecorder.setup()
+            }.environment( audioRecorder)
+            .modelContainer(for : [Recording.self])
         }
+        
     }
 }
 
 #Preview {
     TextSpeechView()
 }
-//in riga 61 luca non ci ha aiutato ovviamente <3
+//in riga 61 luca non ci ha aiutato ovviamente
