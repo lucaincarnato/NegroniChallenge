@@ -10,9 +10,22 @@
 		42E75E822CD8EC22006B36F7 /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4218864C2CEB32EA00AB86A1 /* Exceptions for "NegroniChallenge" folder in "NegroniChallenge" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 42E75E812CD8EC22006B36F7 /* NegroniChallenge */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		42E75E842CD8EC22006B36F7 /* NegroniChallenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4218864C2CEB32EA00AB86A1 /* Exceptions for "NegroniChallenge" folder in "NegroniChallenge" target */,
+			);
 			path = NegroniChallenge;
 			sourceTree = "<group>";
 		};
