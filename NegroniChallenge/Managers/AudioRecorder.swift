@@ -101,7 +101,6 @@ class AudioRecorder: NSObject, ObservableObject {
         fetchRecording()
     }
     
-    // MARK: - Speech Recognition Functionality
     func transcribeAudio(url: URL) {
         // Check if speech recognition is available
         recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
@@ -112,6 +111,8 @@ class AudioRecorder: NSObject, ObservableObject {
         
         let request = SFSpeechURLRecognitionRequest(url: url)
         request.shouldReportPartialResults = true
+        
+        var transcription: String = ""
         
         recognizer.recognitionTask(with: request) { result, error in
             guard error == nil else {
@@ -124,7 +125,18 @@ class AudioRecorder: NSObject, ObservableObject {
             }
             
             // Handle transcription result
-            print("Transcription: \(result.bestTranscription.formattedString)")
+            print("Transcription analysis: \(result.bestTranscription.formattedString)")
+            transcription = result.bestTranscription.formattedString
+            
+            // Append transcription to the latest recording
+            if self.recordings.last != nil {
+                self.recordings[self.recordings.count - 1].transcript = transcription
+                print("Updated recording with transcription: \(transcription)")
+            }
+            
+            // Notify the view for the update
+            self.objectWillChange.send(self)
         }
     }
+
 }

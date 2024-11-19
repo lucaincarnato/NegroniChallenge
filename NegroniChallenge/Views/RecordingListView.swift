@@ -35,6 +35,7 @@ struct RecordingRow: View {
     
     var audioURL: URL
     var audioCreatedAt: Date
+    var audioTranscript: String
     
     @ObservedObject var audioPlayer = AudioPlayer()
     
@@ -76,5 +77,6 @@ struct RecordingRow: View {
                     .imageScale(.large)
             }
         }
+        .buttonStyle(BorderlessButtonStyle())
     }
 }
