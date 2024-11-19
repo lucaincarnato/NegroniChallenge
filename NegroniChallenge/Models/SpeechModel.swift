@@ -25,7 +25,8 @@ struct SpeechModel: Identifiable {
     // Actual body of the speech
     var speechText: String
     // Array of already done rehearsal
-    var previousRecordings: [RecordingModel]
+    // updated
+    var previousRecordings: [Recording]
     var numberOfPeople: Int // (Required) Number of people that act in the speech
     var instructions: String // Info for the stage (for example, gestures or space managment)
     var additionalNotes: String // Additional info (for example, budget or place)

@@ -7,8 +7,20 @@
 
 import SwiftUI
 
+import SwiftData
+
 struct TextSpeechView : View {
     @Environment(SpeechViewModel.self) var speechesVM
+    //Start of spencer's tuto new section
+    /*
+    @Environment(\.modelContext) var context
+    @Environment(AudioRecorder.self) private var audioRecorder : AudioRecorder
+    
+    @Query(sort: \Recording.createdAt, order: .reverse) var allRecordings: [Recording]
+     */
+    //End of spencer's tuto new section
+    @ObservedObject private var audioRecorder: AudioRecorder = AudioRecorder()
+    
     @State var actualSpeech: SpeechModel = SpeechModel(
         speechTitle: "Poesia per Natale",
         cardColor: .blue,
@@ -23,20 +35,22 @@ struct TextSpeechView : View {
             e il mondo ne sarebbe assai più bello
             """,
         previousRecordings: [
-            RecordingModel(title: "Recording1", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording2", duration: "10"),
-            RecordingModel(title: "Recording3", duration: "10")
+            Recording(fileURL: URL(fileURLWithPath: "recordings"), createdAt: Date.now)
         ],
         numberOfPeople: 2,
         instructions: "Be expressive",
         additionalNotes: ""
     )
+    /*
+   RecordingModel(title: "Recording2", duration: "10"),
+   RecordingModel(title: "Recording2", duration: "10"),
+   RecordingModel(title: "Recording2", duration: "10"),
+   RecordingModel(title: "Recording2", duration: "10"),
+   RecordingModel(title: "Recording2", duration: "10"),
+   RecordingModel(title: "Recording2", duration: "10"),
+   RecordingModel(title: "Recording2", duration: "10"),
+   RecordingModel(title: "Recording3", duration: "10")
+    */
     // Variables to differentiate the mode of rehearsing
     @State var textActivator: Bool = true
     @State var subtextActivator: Bool = false
@@ -92,7 +106,7 @@ struct TextSpeechView : View {
                     HStack {
                         Text("With text")
                         Toggle("Text", isOn: $textActivator)
-                            // Uncheck subtext if text is unchecked
+                        // Uncheck subtext if text is unchecked
                             .onChange(of: textActivator, initial: true, {subtextActivator = !textActivator ? false : subtextActivator})
                             .toggleStyle(.switch)
                             .labelsHidden()
@@ -104,24 +118,16 @@ struct TextSpeechView : View {
                             .disabled(!textActivator) // Disables the toggle if the text one is off
                     }
                     .padding(.horizontal, 250)
-                    List{
-                        Section (header: Text("Previous Rehearsals")){
-                            // Goes into feedback view
-                            ForEach(actualSpeech.previousRecordings, id: \.id) { recording in
-                                VStack(alignment: .leading) {
-                                    Text(recording.title)
-                                    Text(recording.duration)
-                                        .font(.caption)
-                                }
-                            }
-                            // Swipe to delete implementation
-                            .onDelete {
-                                indexSet in actualSpeech.previousRecordings.remove(atOffsets: indexSet)
-                            }
-                        }
-                        .headerProminence(.increased)
+                    Text("Previous Rehearsals")
+                        .font(.title)
+                        .padding(20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    VStack {
+                        RecordingsList(audioRecorder: audioRecorder)
                     }
                     .scrollContentBackground(.hidden)
+                    .padding([.top],-50)
                     // Buttons for info and start rehearsal
                     HStack{
                         // Goes to info
@@ -139,21 +145,46 @@ struct TextSpeechView : View {
                         .buttonBorderShape(.capsule)
                         .tint(.blue)
                         .padding(.horizontal, 20)
-                        // Goes to rehearsal
-                        Button(action: {
-                            print("CIAO")
-                        }, label: {
-                            HStack {
-                                Image(systemName: "play.fill")
-                                Text("Rehearse")
-                            }
-                            .padding(.horizontal, 50)
-                        })
-                        .buttonStyle(.bordered)
-                        .controlSize(.large)
-                        .buttonBorderShape(.capsule)
-                        .tint(.red)
-                        .padding(.horizontal, 20)
+                        
+                        // Start of rehearsal button
+                        if audioRecorder.recording == false {
+                            Button(action: {
+                                print("CIAO")
+                                self.audioRecorder.startRecording()
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "play.fill")
+                                    Text("Rehearse")
+                                }
+                                .padding(.horizontal, 50)
+                            })
+                            .buttonStyle(.bordered)
+                            .controlSize(.large)
+                            .buttonBorderShape(.capsule)
+                            .tint(.red)
+                            .padding(.horizontal, 20)
+                        } else {
+                            Button(action: {
+                                print("BYE")
+                                self.audioRecorder.stopRecording()
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "stop.fill")
+                                    Text("Stop recording")
+                                }
+                                .padding(.horizontal, 50)
+                            })
+                            .buttonStyle(.bordered)
+                            .controlSize(.large)
+                            .buttonBorderShape(.capsule)
+                            .tint(.orange)
+                            .padding(.horizontal, 20)
+                        }
+                        // End of rehearsal button
+                        
+                        //RecordButtonView()
+                        
+                        
                     }
                     .padding(.vertical, 20)
                 }
