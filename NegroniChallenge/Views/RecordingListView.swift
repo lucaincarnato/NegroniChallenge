@@ -14,7 +14,8 @@ struct RecordingsList: View {
     var body: some View {
         List {
             ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                RecordingRow(audioURL: recording.fileURL, audioCreatedAt: recording.createdAt)
+                // if no transcript due to SFTranscript issues , just ""
+                RecordingRow(audioURL: recording.fileURL, audioCreatedAt: recording.createdAt, audioTranscript: recording.transcript ?? "" )
             }
         .onDelete(perform: delete)
         }
@@ -33,6 +34,7 @@ struct RecordingRow: View {
     
     var audioURL: URL
     var audioCreatedAt: Date
+    var audioTranscript: String
     
     @ObservedObject var audioPlayer = AudioPlayer()
     
@@ -63,12 +65,13 @@ struct RecordingRow: View {
             }
             //show transcription
             Button(action: {
-                
+                print(audioTranscript)
             }) {
                 Image(systemName: "book")
                     .imageScale(.large)
             }
         }
+        .buttonStyle(BorderlessButtonStyle())
     }
 }
 

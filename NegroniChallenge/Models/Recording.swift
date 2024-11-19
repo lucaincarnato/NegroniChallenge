@@ -12,6 +12,7 @@ import SwiftData
 struct Recording {
     let fileURL: URL
     let createdAt: Date
+    var transcript : String?
 }
 
 
