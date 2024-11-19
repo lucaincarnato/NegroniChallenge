@@ -36,11 +36,13 @@ struct CardView: View {
                 .opacity(0.5)
                 .padding(10)
         }
-        .frame(height: 250) // The height is fixed, the width depends on the device
-        // Allow the long press for the deletion and the share
-        .onAppear { // Creates the txt file when the link appears
+        // The height is fixed, the width depends on the device
+        .frame(height: 250)
+        // Creates the txt file when the link appears
+        .onAppear {
             createTextFile()
         }
+        // Allow the long press for the deletion and the share
         .contextMenu {
             Button (role: .destructive) {
                 remove(actualSpeech)

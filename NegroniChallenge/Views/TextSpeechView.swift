@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TextSpeechView : View {
+    @Environment(SpeechViewModel.self) var speechesVM
     @State var actualSpeech: SpeechModel = SpeechModel(
         speechTitle: "Poesia per Natale",
         cardColor: .blue,
@@ -39,6 +40,8 @@ struct TextSpeechView : View {
     // Variables to differentiate the mode of rehearsing
     @State var textActivator: Bool = true
     @State var subtextActivator: Bool = false
+    @State private var editModal = false
+    @State private var infoModal = false
     
     var body: some View {
         NavigationStack {
@@ -54,11 +57,28 @@ struct TextSpeechView : View {
                             .cornerRadius(15)
                         ScrollView{
                             // Displays the text only if its toggle is active
-                            if(textActivator){
+                            if(textActivator && !subtextActivator){
                                 Text(actualSpeech.speechText)
                                     .padding(20)
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
                                     .font(.title)
+                            } else if(subtextActivator) {
+                                LazyVGrid(columns: [GridItem(.adaptive(minimum: 130))], spacing: 10) {
+                                    // It creates unique ids for each word so that the ForEach can show it even if there's many occurrences of the same word
+                                    let words = Array(zip(actualSpeech.speechText.components(separatedBy: .whitespacesAndNewlines).indices, actualSpeech.speechText.components(separatedBy: .whitespacesAndNewlines)))
+                                    ForEach(words, id: \.0) { _, word in
+                                        ZStack {
+                                            Rectangle()
+                                                .fill(Color.gray)
+                                                .opacity(0.3)
+                                                .frame(width: 130, height: 40)
+                                                .cornerRadius(10)
+                                            Text(word)
+                                        }
+                                    }
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(20)
                             } else {
                                 Text("Text disabled")
                                     .foregroundStyle(.gray)
@@ -106,7 +126,7 @@ struct TextSpeechView : View {
                     HStack{
                         // Goes to info
                         Button(action: {
-                            print("CIAO")
+                            infoModal.toggle()
                         }, label: {
                             HStack {
                                 Image(systemName: "info.circle")
@@ -138,10 +158,22 @@ struct TextSpeechView : View {
                     .padding(.vertical, 20)
                 }
                 .navigationTitle(actualSpeech.speechTitle)
-                // Goes into edit mode
-                .toolbar{
-                    ToolbarItem(placement: .topBarTrailing){
-                        Button("Edit", action: {print("CIAO")})
+                //modal to EditTextView
+                .sheet(isPresented: $editModal){
+                    EditTextView(speechesVM: _speechesVM, showModal: $editModal, actualSpeech: actualSpeech)
+                }
+                //modal to TextInfoView
+                .sheet(isPresented: $infoModal){
+                    TextInfoView(actualSpeech: actualSpeech, infoModal: $infoModal)
+                }
+                // Toolbar for the edit button
+                .toolbar {
+                    ToolbarItem (placement: .topBarTrailing) {
+                        Button {
+                            editModal.toggle()
+                        } label: {
+                            Text("Edit")
+                        }
                     }
                 }
             }
@@ -151,5 +183,6 @@ struct TextSpeechView : View {
 
 #Preview {
     TextSpeechView()
+        .environment(SpeechViewModel())
 }
 //in riga 61 luca non ci ha aiutato ovviamente <3

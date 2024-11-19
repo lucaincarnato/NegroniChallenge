@@ -16,25 +16,16 @@ import SwiftUI
 struct NewSpeechView: View {
     // Speech speech starting point
     @State var actualSpeech: SpeechModel = SpeechModel(
-        speechTitle: "Poesia per Natale",
+        speechTitle: "",
         cardColor: .blue,
         dateOfPlay: Date.now,
         hourDuration: 0,
         minuteDuration: 0,
-        secondDuration: 40,
-        speechText: """
-        Se ni’ mondo esistesse un po’ di bene
-        e ognun si honsiderasse suo fratello
-        ci sarebbe meno pensieri e meno pene
-        e il mondo ne sarebbe assai più bello
-        """,
-        previousRecordings: [
-            RecordingModel(title: "Recording1", duration: "10"),
-            RecordingModel(title: "Recording1", duration: "10"),
-            RecordingModel(title: "Recording1", duration: "10")
-        ],
-        numberOfPeople: 2,
-        instructions: "Be expressive",
+        secondDuration: 0,
+        speechText: "",
+        previousRecordings: [],
+        numberOfPeople: 1,
+        instructions: "",
         additionalNotes: ""
     )
     @Binding var showModal: Bool
@@ -106,6 +97,7 @@ struct NewSpeechView: View {
                         // Adds only if the title is not empty and if the date is not on the past
                         if(actualSpeech.speechTitle != "" && actualSpeech.dateOfPlay > Date.now){
                             add(actualSpeech)
+                            showModal.toggle()
                         } else {
                             cannotSave.toggle()
                         }
@@ -128,26 +120,5 @@ struct NewSpeechView: View {
 }
 
 #Preview{
-    NewSpeechView(actualSpeech: SpeechModel(
-        speechTitle: "Poesia per Natale",
-        cardColor: .blue,
-        dateOfPlay: Date.now,
-        hourDuration: 0,
-        minuteDuration: 0,
-        secondDuration: 40,
-        speechText: """
-        Se ni’ mondo esistesse un po’ di bene
-        e ognun si honsiderasse suo fratello
-        ci sarebbe meno pensieri e meno pene
-        e il mondo ne sarebbe assai più bello
-        """,
-        previousRecordings: [
-            RecordingModel(title: "Recording1", duration: "10"),
-            RecordingModel(title: "Recording1", duration: "10"),
-            RecordingModel(title: "Recording1", duration: "10")
-        ],
-        numberOfPeople: 2,
-        instructions: "Be expressive",
-        additionalNotes: ""
-    ),showModal: .constant(true), add: {speech in })
+    NewSpeechView(showModal: .constant(true), add: {speech in })
 }
