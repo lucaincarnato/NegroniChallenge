@@ -25,9 +25,7 @@ class SpeechViewModel {
             e il mondo ne sarebbe assai più bello
             """,
             previousRecordings: [
-                RecordingModel(title: "Recording1", duration: "10"),
-                RecordingModel(title: "Recording1", duration: "10"),
-                RecordingModel(title: "Recording1", duration: "10")
+                Recording(fileURL: URL(fileURLWithPath: "recordings"), createdAt: Date.now)
             ],
             numberOfPeople: 2,
             instructions: "Be expressive",
@@ -47,9 +45,7 @@ class SpeechViewModel {
             e il mondo ne sarebbe assai più bello
             """,
             previousRecordings: [
-                RecordingModel(title: "Recording1", duration: "10"),
-                RecordingModel(title: "Recording2", duration: "10"),
-                RecordingModel(title: "Recording3", duration: "10")
+                Recording(fileURL: URL(fileURLWithPath: "recordings"), createdAt: Date.now)
             ],
             numberOfPeople: 2,
             instructions: "Be expressive",
@@ -74,9 +70,7 @@ class SpeechViewModel {
             Aenean mattis, massa vitae ornare mollis, lectus quam tincidunt ipsum, quis volutpat augue odio in nisl. Mauris pharetra in sem in efficitur. Praesent vestibulum, sapien et dapibus finibus, eros sem mollis felis, ullamcorper porta odio diam et magna. Nulla gravida volutpat ex, ut posuere nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam a dignissim augue, quis gravida est. Sed dapibus consectetur lacus. Quisque sed orci nunc. Pellentesque imperdiet at nisi et finibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque ornare convallis neque, at faucibus arcu tempor sit amet. Curabitur a fermentum quam, eget egestas elit. Vestibulum neque est, efficitur ut metus id, malesuada gravida magna. Integer tincidunt ligula quis risus accumsan ornare. Curabitur laoreet eleifend orci feugiat laoreet.
             """,
             previousRecordings: [
-                RecordingModel(title: "Recording1", duration: "10"),
-                RecordingModel(title: "Recording2", duration: "10"),
-                RecordingModel(title: "Recording3", duration: "10")
+                Recording(fileURL: URL(fileURLWithPath: "recordings"), createdAt: Date.now)
             ],
             numberOfPeople: 2,
             instructions: "Be expressive",
@@ -101,9 +95,7 @@ class SpeechViewModel {
             Aenean mattis, massa vitae ornare mollis, lectus quam tincidunt ipsum, quis volutpat augue odio in nisl. Mauris pharetra in sem in efficitur. Praesent vestibulum, sapien et dapibus finibus, eros sem mollis felis, ullamcorper porta odio diam et magna. Nulla gravida volutpat ex, ut posuere nisi hendrerit at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam a dignissim augue, quis gravida est. Sed dapibus consectetur lacus. Quisque sed orci nunc. Pellentesque imperdiet at nisi et finibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque ornare convallis neque, at faucibus arcu tempor sit amet. Curabitur a fermentum quam, eget egestas elit. Vestibulum neque est, efficitur ut metus id, malesuada gravida magna. Integer tincidunt ligula quis risus accumsan ornare. Curabitur laoreet eleifend orci feugiat laoreet.
             """,
             previousRecordings: [
-                RecordingModel(title: "Recording1", duration: "10"),
-                RecordingModel(title: "Recording2", duration: "10"),
-                RecordingModel(title: "Recording3", duration: "10")
+                Recording(fileURL: URL(fileURLWithPath: "recordings"), createdAt: Date.now)
             ],
             numberOfPeople: 2,
             instructions: "Be expressive",

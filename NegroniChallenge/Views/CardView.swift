@@ -90,9 +90,7 @@ struct CardView: View {
         e il mondo ne sarebbe assai più bello
         """,
         previousRecordings: [
-            RecordingModel(title: "Recording1", duration: "10"),
-            RecordingModel(title: "Recording1", duration: "10"),
-            RecordingModel(title: "Recording1", duration: "10")
+            Recording(fileURL: URL(fileURLWithPath: "recordings"), createdAt: Date.now)
         ],
         numberOfPeople: 2,
         instructions: "Be expressive",
