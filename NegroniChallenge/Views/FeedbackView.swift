@@ -12,7 +12,6 @@ struct FeedbackView: View {
     @State var transcription: String
     
     var body: some View {
-        NavigationStack {
             VStack{
                 ZStack {
                     // Background color
@@ -32,7 +31,6 @@ struct FeedbackView: View {
                             }
                         }
                         .padding()
-                        .frame(height: 400)
                         ZStack {
                             Rectangle()
                                 .fill(Color.white)
@@ -45,12 +43,10 @@ struct FeedbackView: View {
                             }
                         }
                         .padding()
-                        .frame(height: 400)
                     }
                 }
             }
         }
-    }
 }
 
 #Preview {

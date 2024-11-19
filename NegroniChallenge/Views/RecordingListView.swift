@@ -15,7 +15,9 @@ struct RecordingsList: View {
         List {
             Section (header: Text("Previous rehearsal")){
                 ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                    RecordingRow(audioURL: recording.fileURL, audioCreatedAt: recording.createdAt)
+                    NavigationLink(destination: FeedbackView(speechText: actualSpeech.speechText, transcription: recording.transcript ?? "")){
+                        RecordingRow(audioURL: recording.fileURL, audioCreatedAt: recording.createdAt, actualSpeech: $actualSpeech)
+                    }
                 }
                 .onDelete(perform: delete)
             }
@@ -35,7 +37,7 @@ struct RecordingRow: View {
     
     var audioURL: URL
     var audioCreatedAt: Date
-    var audioTranscript: String
+    @Binding var actualSpeech: SpeechModel
     
     @ObservedObject var audioPlayer = AudioPlayer()
     
@@ -63,18 +65,6 @@ struct RecordingRow: View {
                     Image(systemName: "stop.fill")
                         .imageScale(.large)
                 }
-            }
-            //show transcription
-            /*Button(action: {
-                
-            }) {
-                Image(systemName: "book")
-                    .imageScale(.large)
-            }
-             */
-            NavigationLink(destination: FeedbackView(speechText: actualSpeech.speechText, transcription: audioPlayer.)) {
-                Image(systemName: "book")
-                    .imageScale(.large)
             }
         }
         .buttonStyle(BorderlessButtonStyle())

@@ -22,7 +22,7 @@ struct TSV: View {
     var body: some View {
         NavigationView {
             VStack {
-                RecordingsList(audioRecorder: audioRecorder)
+                RecordingsList(actualSpeech: .constant(SpeechModel(speechTitle: "", hourDuration: 0, minuteDuration: 0, secondDuration: 0, speechText: "", previousRecordings: [], numberOfPeople: 0, instructions: "", additionalNotes: "")), audioRecorder: audioRecorder)
                 
                 if audioRecorder.recording == false {
                     Button(action: {self.audioRecorder.startRecording()}) {

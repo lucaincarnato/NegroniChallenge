@@ -120,7 +120,7 @@ struct TextSpeechView : View {
                     }
                     .padding(.horizontal, 250)
                     VStack {
-                        RecordingsList(audioRecorder: audioRecorder)
+                        RecordingsList(actualSpeech: $actualSpeech, audioRecorder: audioRecorder)
                     }
                     .scrollContentBackground(.hidden)
                     // Buttons for info and start rehearsal
