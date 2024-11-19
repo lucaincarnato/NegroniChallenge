@@ -13,10 +13,10 @@ struct TextSpeechView : View {
     @Environment(SpeechViewModel.self) var speechesVM
     //Start of spencer's tuto new section
     /*
-    @Environment(\.modelContext) var context
-    @Environment(AudioRecorder.self) private var audioRecorder : AudioRecorder
-    
-    @Query(sort: \Recording.createdAt, order: .reverse) var allRecordings: [Recording]
+     @Environment(\.modelContext) var context
+     @Environment(AudioRecorder.self) private var audioRecorder : AudioRecorder
+     
+     @Query(sort: \Recording.createdAt, order: .reverse) var allRecordings: [Recording]
      */
     //End of spencer's tuto new section
     @ObservedObject private var audioRecorder: AudioRecorder = AudioRecorder()
@@ -42,15 +42,15 @@ struct TextSpeechView : View {
         additionalNotes: ""
     )
     /*
-   RecordingModel(title: "Recording2", duration: "10"),
-   RecordingModel(title: "Recording2", duration: "10"),
-   RecordingModel(title: "Recording2", duration: "10"),
-   RecordingModel(title: "Recording2", duration: "10"),
-   RecordingModel(title: "Recording2", duration: "10"),
-   RecordingModel(title: "Recording2", duration: "10"),
-   RecordingModel(title: "Recording2", duration: "10"),
-   RecordingModel(title: "Recording3", duration: "10")
-    */
+     RecordingModel(title: "Recording2", duration: "10"),
+     RecordingModel(title: "Recording2", duration: "10"),
+     RecordingModel(title: "Recording2", duration: "10"),
+     RecordingModel(title: "Recording2", duration: "10"),
+     RecordingModel(title: "Recording2", duration: "10"),
+     RecordingModel(title: "Recording2", duration: "10"),
+     RecordingModel(title: "Recording2", duration: "10"),
+     RecordingModel(title: "Recording3", duration: "10")
+     */
     // Variables to differentiate the mode of rehearsing
     @State var textActivator: Bool = true
     @State var subtextActivator: Bool = false
@@ -103,6 +103,7 @@ struct TextSpeechView : View {
                         }
                     }
                     .padding()
+                    .frame(height: 400)
                     HStack {
                         Text("With text")
                         Toggle("Text", isOn: $textActivator)
@@ -118,16 +119,10 @@ struct TextSpeechView : View {
                             .disabled(!textActivator) // Disables the toggle if the text one is off
                     }
                     .padding(.horizontal, 250)
-                    Text("Previous Rehearsals")
-                        .font(.title)
-                        .padding(20)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
                     VStack {
                         RecordingsList(audioRecorder: audioRecorder)
                     }
                     .scrollContentBackground(.hidden)
-                    .padding([.top],-50)
                     // Buttons for info and start rehearsal
                     HStack{
                         // Goes to info
@@ -136,16 +131,12 @@ struct TextSpeechView : View {
                         }, label: {
                             HStack {
                                 Image(systemName: "info.circle")
-                                Text("Speech info")
                             }
-                            .padding(.horizontal, 40)
                         })
                         .buttonStyle(.bordered)
                         .controlSize(.large)
                         .buttonBorderShape(.capsule)
                         .tint(.blue)
-                        .padding(.horizontal, 20)
-                        
                         // Start of rehearsal button
                         if audioRecorder.recording == false {
                             Button(action: {
@@ -162,7 +153,6 @@ struct TextSpeechView : View {
                             .controlSize(.large)
                             .buttonBorderShape(.capsule)
                             .tint(.red)
-                            .padding(.horizontal, 20)
                         } else {
                             Button(action: {
                                 print("BYE")
@@ -181,17 +171,14 @@ struct TextSpeechView : View {
                             .padding(.horizontal, 20)
                         }
                         // End of rehearsal button
-                        
                         //RecordButtonView()
-                        
-                        
                     }
                     .padding(.vertical, 20)
                 }
                 .navigationTitle(actualSpeech.speechTitle)
                 //modal to EditTextView
                 .sheet(isPresented: $editModal){
-                    EditTextView(speechesVM: _speechesVM, showModal: $editModal, actualSpeech: actualSpeech)
+                    EditTextView(speechesVM: _speechesVM, showModal: $editModal, actualSpeech: $actualSpeech)
                 }
                 //modal to TextInfoView
                 .sheet(isPresented: $infoModal){

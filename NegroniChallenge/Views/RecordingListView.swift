@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct RecordingsList: View {
-    
+    @Binding var actualSpeech: SpeechModel
     @ObservedObject var audioRecorder: AudioRecorder
     
     var body: some View {
         List {
-            ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
-                RecordingRow(audioURL: recording.fileURL, audioCreatedAt: recording.createdAt)
+            Section (header: Text("Previous rehearsal")){
+                ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
+                    RecordingRow(audioURL: recording.fileURL, audioCreatedAt: recording.createdAt)
+                }
+                .onDelete(perform: delete)
             }
-        .onDelete(perform: delete)
         }
     }
     
@@ -62,18 +64,17 @@ struct RecordingRow: View {
                 }
             }
             //show transcription
-            Button(action: {
+            /*Button(action: {
                 
             }) {
                 Image(systemName: "book")
                     .imageScale(.large)
             }
+             */
+            NavigationLink(destination: FeedbackView(speechText: actualSpeech.speechText, transcription: audioPlayer.)) {
+                Image(systemName: "book")
+                    .imageScale(.large)
+            }
         }
-    }
-}
-
-struct RecordingsList_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordingsList(audioRecorder: AudioRecorder())
     }
 }

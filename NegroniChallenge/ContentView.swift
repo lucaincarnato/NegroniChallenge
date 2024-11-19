@@ -25,7 +25,7 @@ struct ContentView: View {
                     // Looks into the data array to show all the speeches in the sidebar
                     Tab(speech.speechTitle, systemImage: ""){
                         // TODO: Correct this issue
-                        //TextSpeechView(actualSpeech: speech)
+                        TextSpeechView(actualSpeech: speech)
                     }
                 }
             }

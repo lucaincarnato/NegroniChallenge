@@ -37,9 +37,6 @@ struct TextInfoView: View {
             if(!editMode){
                 VStack{
                     List{
-                        Section(header: Text("Color")){
-                            Text(actualSpeech.dateOfPlay.formatted(.dateTime))
-                        }
                         Section(header: Text("Date")){
                             Text(actualSpeech.dateOfPlay.formatted(.dateTime))
                         }
