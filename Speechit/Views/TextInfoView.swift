@@ -122,6 +122,7 @@ struct TextInfoView: View {
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing){
                         Button("Save"){
+                            // The color isn't directly connected to the object for simulation purposes
                             actualSpeech.setColor(color)
                             editMode.toggle()
                         }

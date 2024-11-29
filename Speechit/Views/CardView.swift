@@ -9,8 +9,7 @@ import SwiftUI
 
 struct CardView: View {
     // Link to takes the file for sharing
-    @State private var fileURL: URL?
-    
+    @State private var fileURL: URL?    
     // Speech associated with the card
     var actualSpeech: Speech
     // Function for the deletion, delegated the definition

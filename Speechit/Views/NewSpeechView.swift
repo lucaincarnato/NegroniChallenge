@@ -85,6 +85,7 @@ struct NewSpeechView: View {
                     Button("Next") {
                         // Adds only if the title is not empty and if the date is not on the past
                         if(actualSpeech.isNotDefault()){
+                            // The color isn't directly connected to the object for simulation purposes
                             actualSpeech.setColor(color)
                             add(actualSpeech)
                             showModal.toggle()

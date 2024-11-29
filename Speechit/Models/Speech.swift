@@ -20,7 +20,7 @@ class Speech: Identifiable{
     @Attribute(.unique) var title: String = "" // Required
     var date: Date = Date.now // Required to be not in past
     
-    // Info about the color. Required, custom because SwiftData doesn't support SwiftUI/Color
+    // Simulated color. Required, custom because SwiftData doesn't support SwiftUI/Color
     var red: CGFloat = 0.9921568632125854
     var green: CGFloat = 0.7803921699523926
     var blue: CGFloat = 0.0
@@ -75,11 +75,13 @@ class Speech: Identifiable{
         return true
     }
     
+    // Returns SwiftUI Color from simulated color
     func getColor() -> Color{
         print(Color(red: self.red, green: self.green, blue: self.blue, opacity: self.alpha))
         return Color(red: self.red, green: self.green, blue: self.blue, opacity: self.alpha)
     }
     
+    // Get SwiftUI Color and changes simulated color according
     func setColor(_ color: Color){
         let colorBuffer = UIColor(color)
         colorBuffer.getRed(&self.red, green: &self.green, blue: &self.blue, alpha: &self.alpha)
