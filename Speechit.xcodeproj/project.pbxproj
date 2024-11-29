@@ -12,16 +12,16 @@
 
 /* Begin PBXFileReference section */
 		428636922CF922850023670F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		42E75E822CD8EC22006B36F7 /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42E75E822CD8EC22006B36F7 /* Speechit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Speechit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		4218864C2CEB32EA00AB86A1 /* Exceptions for "Speechit" folder in "NegroniChallenge" target */ = {
+		4218864C2CEB32EA00AB86A1 /* Exceptions for "Speechit" folder in "Speechit" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 42E75E812CD8EC22006B36F7 /* NegroniChallenge */;
+			target = 42E75E812CD8EC22006B36F7 /* Speechit */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -29,7 +29,7 @@
 		42E75E842CD8EC22006B36F7 /* Speechit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				4218864C2CEB32EA00AB86A1 /* Exceptions for "Speechit" folder in "NegroniChallenge" target */,
+				4218864C2CEB32EA00AB86A1 /* Exceptions for "Speechit" folder in "Speechit" target */,
 			);
 			path = Speechit;
 			sourceTree = "<group>";
@@ -59,7 +59,7 @@
 		42E75E832CD8EC22006B36F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				42E75E822CD8EC22006B36F7 /* NegroniChallenge.app */,
+				42E75E822CD8EC22006B36F7 /* Speechit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,9 +67,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		42E75E812CD8EC22006B36F7 /* NegroniChallenge */ = {
+		42E75E812CD8EC22006B36F7 /* Speechit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 42E75E902CD8EC23006B36F7 /* Build configuration list for PBXNativeTarget "NegroniChallenge" */;
+			buildConfigurationList = 42E75E902CD8EC23006B36F7 /* Build configuration list for PBXNativeTarget "Speechit" */;
 			buildPhases = (
 				42E75E7E2CD8EC22006B36F7 /* Sources */,
 				42E75E7F2CD8EC22006B36F7 /* Frameworks */,
@@ -82,11 +82,11 @@
 			fileSystemSynchronizedGroups = (
 				42E75E842CD8EC22006B36F7 /* Speechit */,
 			);
-			name = NegroniChallenge;
+			name = Speechit;
 			packageProductDependencies = (
 			);
 			productName = NegroniChallenge;
-			productReference = 42E75E822CD8EC22006B36F7 /* NegroniChallenge.app */;
+			productReference = 42E75E822CD8EC22006B36F7 /* Speechit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -111,6 +111,8 @@
 				en,
 				Base,
 				it,
+				"es-419",
+				de,
 			);
 			mainGroup = 42E75E792CD8EC22006B36F7;
 			minimizedProjectReferenceProxies = 1;
@@ -121,7 +123,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				42E75E812CD8EC22006B36F7 /* NegroniChallenge */,
+				42E75E812CD8EC22006B36F7 /* Speechit */,
 			);
 		};
 /* End PBXProject section */
@@ -276,12 +278,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NegroniChallenge/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Speechit/Preview Content\"";
 				DEVELOPMENT_TEAM = W3B7XH945C;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDE_SOURCE_FILE_NAMES = "NegroniChallenge/NoCompile/*";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NegroniChallenge/Info.plist;
+				INFOPLIST_FILE = Speechit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Speechit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App perm to record audio";
@@ -314,12 +316,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NegroniChallenge/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Speechit/Preview Content\"";
 				DEVELOPMENT_TEAM = W3B7XH945C;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDE_SOURCE_FILE_NAMES = "NegroniChallenge/NoCompile/*";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NegroniChallenge/Info.plist;
+				INFOPLIST_FILE = Speechit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Speechit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App perm to record audio";
@@ -357,7 +359,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42E75E902CD8EC23006B36F7 /* Build configuration list for PBXNativeTarget "NegroniChallenge" */ = {
+		42E75E902CD8EC23006B36F7 /* Build configuration list for PBXNativeTarget "Speechit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42E75E912CD8EC23006B36F7 /* Debug */,
