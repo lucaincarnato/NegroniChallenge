@@ -5,49 +5,38 @@
 //  Created by Jesus Sebastian Jaime Oviedo on 12/11/24.
 //
 
-
-/*
- TO BE DONE:
- Adding date picker
- */
-
 import SwiftUI
 
 struct NewSpeechView: View {
-    // Speech speech starting point
-    @State var actualSpeech: SpeechModel = SpeechModel(
-        speechTitle: "",
-        cardColor: .blue,
-        dateOfPlay: Date.now,
-        hourDuration: 0,
-        minuteDuration: 0,
-        secondDuration: 0,
-        speechText: "",
-        previousRecordings: [],
-        numberOfPeople: 1,
-        instructions: "",
-        additionalNotes: ""
-    )
+    // Default speech
+    @State var actualSpeech: Speech = Speech("", .red, Date.now)
+    // Placeholder for the color
+    @State var color: Color = .red
+    // Boolean variable for the modality
     @Binding var showModal: Bool
+    // Boolean variable that allows to save if speech is not default
     @State var cannotSave: Bool = false
-    var add: (_ speech: SpeechModel) -> Void
+    // Function for the add, delegated the definition
+    var add: (_ speech: Speech) -> Void
+    
     var body: some View {
         NavigationStack {
+            // Allows the user to insert infos
             Form {
                 // Title and card color selection
                 Section {
                     LabeledContent("Title") {
-                        TextField("Required", text: $actualSpeech.speechTitle)
+                        TextField("Required", text: $actualSpeech.title)
                     }
                     LabeledContent("Select a color") {
-                        ColorPicker("", selection: $actualSpeech.cardColor)
+                        ColorPicker("", selection: $color)
                             .pickerStyle(.automatic)
                     }
                 }
                 // Duration (in h/min/sec) and number of people selection
                 Section {
                     LabeledContent("Date") {
-                        DatePicker("", selection: $actualSpeech.dateOfPlay)
+                        DatePicker("", selection: $actualSpeech.date, in: Date.now...)
                             .datePickerStyle(.compact)
                     }
                     LabeledContent("Duration") {
@@ -79,7 +68,7 @@ struct NewSpeechView: View {
                 }
                 // Additional info selection
                 Section(header: Text("Stage instructions")){
-                    TextField("Optional", text: $actualSpeech.instructions)
+                    TextField("Optional", text: $actualSpeech.stageInstructions)
                         .frame(minHeight: 100, alignment: .topLeading)
                         .padding([.top], 5)
                 }
@@ -95,13 +84,15 @@ struct NewSpeechView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Next") {
                         // Adds only if the title is not empty and if the date is not on the past
-                        if(actualSpeech.speechTitle != "" && actualSpeech.dateOfPlay > Date.now){
+                        if(actualSpeech.isNotDefault()){
+                            actualSpeech.setColor(color)
                             add(actualSpeech)
                             showModal.toggle()
                         } else {
                             cannotSave.toggle()
                         }
                     }
+                    // Alerts the user when it cannot save 
                     .alert("Something \nwent wrong", isPresented: $cannotSave) {
                         Button("OK", role: .cancel) {
                             cannotSave.toggle()
@@ -117,8 +108,4 @@ struct NewSpeechView: View {
             }
         }
     }
-}
-
-#Preview{
-    NewSpeechView(showModal: .constant(true), add: {speech in })
 }

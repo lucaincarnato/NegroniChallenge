@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @State var speechesVM = SpeechViewModel()
+    @Environment(\.modelContext) private var context
+    @Query private var speeches: [Speech]
     
     var body: some View {
         // TabBar with Sidebar option to display main sections of the app
@@ -21,9 +23,9 @@ struct ContentView: View {
             }
             // Show the link to each speech
             TabSection("Speeches") {
-                ForEach(speechesVM.data) { speech in
+                ForEach(speeches) { speech in
                     // Looks into the data array to show all the speeches in the sidebar
-                    Tab(speech.speechTitle, systemImage: ""){
+                    Tab(speech.title, systemImage: ""){
                         // TODO: Correct this issue
                         TextSpeechView(actualSpeech: speech)
                     }
@@ -33,12 +35,10 @@ struct ContentView: View {
             // Hides the Section from the TabBar but not from the Sidebar
         }
         .tabViewStyle(.sidebarAdaptable) // Allows the Sidebar
-        .environment(speechesVM) // Pushes the data object into the environment to make it available to all views
     }
 }
 
 #Preview {
     // The environment variable is needed as an "example" to not make the simulator crash
     ContentView()
-        .environment(SpeechViewModel())
 }

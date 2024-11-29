@@ -8,22 +8,26 @@
 import SwiftUI
 
 struct CardView: View {
-    @State private var fileURL: URL? // txt file's URL
+    // Link to takes the file for sharing
+    @State private var fileURL: URL?
     
-    var actualSpeech: SpeechModel // Speech associated with the card
-    var remove: (_ speech: SpeechModel) -> Void // Function for the deletion, delegated the definition
+    // Speech associated with the card
+    var actualSpeech: Speech
+    // Function for the deletion, delegated the definition
+    var remove: (_ speech: Speech) -> Void
     
     var body: some View {
+        // ZStack for the overlay of card's background and its info
         ZStack{
             // Info
             VStack{
-                Text(actualSpeech.speechTitle)
+                Text(actualSpeech.title)
                     .bold()
                     .font(.title2)
                     .frame(maxHeight: 100, alignment: .center)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 20)
-                Text(actualSpeech.dateOfPlay.formatted(date: .numeric, time: .shortened))
+                Text(actualSpeech.date.formatted(date: .numeric, time: .shortened))
                 HStack{
                     Image(systemName: "person.fill")
                     Text("\(actualSpeech.numberOfPeople)")
@@ -32,23 +36,25 @@ struct CardView: View {
             }
             // Background
             RoundedRectangle(cornerRadius:15)
-                .foregroundColor(actualSpeech.cardColor)
+                .foregroundColor(actualSpeech.getColor())
                 .opacity(0.5)
                 .padding(10)
         }
-        // The height is fixed, the width depends on the device
+        // Card's height is fixed, the width depends on the device
         .frame(height: 250)
-        // Creates the txt file when the link appears
+        // Creates the txt file when the card appears
         .onAppear {
             createTextFile()
         }
         // Allow the long press for the deletion and the share
         .contextMenu {
+            // Delete
             Button (role: .destructive) {
                 remove(actualSpeech)
             } label: {
                 Label("Delete", systemImage: "trash")
             }
+            // Share
             if let fileURL = fileURL {
                 // ShareLink with the txt file already created
                 ShareLink(item: fileURL, preview: SharePreview("File di testo"))
@@ -65,10 +71,10 @@ struct CardView: View {
         // Get temporary directory
         let tempDir = FileManager.default.temporaryDirectory
         // Define file .txt's path
-        let filePath = tempDir.appendingPathComponent("\(actualSpeech.speechTitle)BlaBlaBla.txt")
+        let filePath = tempDir.appendingPathComponent("\(actualSpeech.title).json")
         do {
             // Writes the text in the file
-            try actualSpeech.speechText.write(to: filePath, atomically: true, encoding: .utf8)
+            try actualSpeech.text.write(to: filePath, atomically: true, encoding: .utf8)
             // Assign file's URL to state variable
             self.fileURL = filePath
         } catch {
@@ -78,24 +84,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(actualSpeech: SpeechModel(
-        speechTitle: "Poesia per Natale",
-        cardColor: .blue,
-        dateOfPlay: Date.now,
-        hourDuration: 0,
-        minuteDuration: 0,
-        secondDuration: 40,
-        speechText: """
-        Se ni’ mondo esistesse un po’ di bene
-        e ognun si honsiderasse suo fratello
-        ci sarebbe meno pensieri e meno pene
-        e il mondo ne sarebbe assai più bello
-        """,
-        previousRecordings: [
-            Recording(fileURL: URL(fileURLWithPath: "recordings"), createdAt: Date.now)
-        ],
-        numberOfPeople: 2,
-        instructions: "Be expressive",
-        additionalNotes: ""
-    ), remove: {speech in })
+    CardView(actualSpeech: Speech("La marionetta", .red, Date.now), remove: {speech in })
 }

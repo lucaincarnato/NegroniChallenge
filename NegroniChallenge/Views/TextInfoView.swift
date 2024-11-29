@@ -9,36 +9,23 @@ import SwiftUI
 
 struct TextInfoView: View {
     // Speech speech starting point
-    @State var actualSpeech: SpeechModel = SpeechModel(
-        speechTitle: "Poesia per Natale",
-        cardColor: .blue,
-        dateOfPlay: Date.now,
-        hourDuration: 0,
-        minuteDuration: 0,
-        secondDuration: 40,
-        speechText: """
-            Se ni’ mondo esistesse un po’ di bene
-            e ognun si honsiderasse suo fratello
-            ci sarebbe meno pensieri e meno pene
-            e il mondo ne sarebbe assai più bello
-            """,
-        previousRecordings: [
-            Recording(fileURL: URL(fileURLWithPath: "recordings"), createdAt: Date.now)
-        ],
-        numberOfPeople: 2,
-        instructions: "Be expressive",
-        additionalNotes: ""
-    )
+    @State var actualSpeech: Speech
+    // Placeholder for the color
+    @State var color: Color = .red
+    // Boolean variable for the modality
     @Binding var infoModal: Bool
+    // Boolean variable for the edit mode
     @State var editMode: Bool = false
     
     var body: some View {
         NavigationStack{
+            // Shows the edit mode only when it is toggled
             if(!editMode){
                 VStack{
+                    // List of information that need to be displayed
                     List{
                         Section(header: Text("Date")){
-                            Text(actualSpeech.dateOfPlay.formatted(.dateTime))
+                            Text(actualSpeech.date.formatted(.dateTime))
                         }
                         Section(header: Text("Duration")){
                             Text("\(actualSpeech.hourDuration)h:\(actualSpeech.minuteDuration)min:\(actualSpeech.secondDuration)s")
@@ -48,7 +35,7 @@ struct TextInfoView: View {
                         }
                         // Additional info selection
                         Section(header: Text("Stage instructions")){
-                            Text(actualSpeech.instructions)
+                            Text(actualSpeech.stageInstructions)
                                 .frame(minHeight: 100, alignment: .topLeading)
                                 .padding([.top], 5)
                         }
@@ -59,7 +46,8 @@ struct TextInfoView: View {
                         }
                     }
                 }
-                .navigationTitle(actualSpeech.speechTitle)
+                .navigationTitle(actualSpeech.title)
+                // Toolbar for the edit and the cancel actions
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing){
                         Button("Edit"){
@@ -73,21 +61,22 @@ struct TextInfoView: View {
                     }
                 }
             } else {
+                // List of information that need to be edited
                 Form {
                     // Title and card color selection
                     Section {
                         LabeledContent("Title") {
-                            TextField("Required", text: $actualSpeech.speechTitle)
+                            TextField("Required", text: $actualSpeech.title)
                         }
                         LabeledContent("Select a color") {
-                            ColorPicker("", selection: $actualSpeech.cardColor)
+                            ColorPicker("", selection: $color)
                                 .pickerStyle(.automatic)
                         }
                     }
                     // Duration (in h/min/sec) and number of people selection
                     Section {
                         LabeledContent("Date") {
-                            DatePicker("", selection: $actualSpeech.dateOfPlay)
+                            DatePicker("", selection: $actualSpeech.date)
                                 .datePickerStyle(.compact)
                         }
                         LabeledContent("Duration") {
@@ -119,7 +108,7 @@ struct TextInfoView: View {
                     }
                     // Additional info selection
                     Section(header: Text("Stage instructions")){
-                        TextField("Optional", text: $actualSpeech.instructions)
+                        TextField("Optional", text: $actualSpeech.stageInstructions)
                             .frame(minHeight: 100, alignment: .topLeading)
                             .padding([.top], 5)
                     }
@@ -129,9 +118,11 @@ struct TextInfoView: View {
                             .padding([.top], 5)
                     }
                 }
+                // Toolbar for the saving and the canceling actions
                 .toolbar{
                     ToolbarItem(placement: .topBarTrailing){
                         Button("Save"){
+                            actualSpeech.setColor(color)
                             editMode.toggle()
                         }
                     }
@@ -144,8 +135,4 @@ struct TextInfoView: View {
             }
         }
     }
-}
-
-#Preview {
-    TextInfoView(infoModal: .constant(true))
 }

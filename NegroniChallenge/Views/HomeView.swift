@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeView: View {
-    // Data set got from the environment (in ContentView)
-    @Environment(SpeechViewModel.self) var speechesVM
+    @Environment(\.modelContext) private var context
+    @Query private var speeches: [Speech]
+    // Boolean variable for the modality
     @State private var showModal = false
-    // Information about the four columns of the LazyVGrid
+    // Describes how many columns and how they act in the grid
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -21,36 +23,45 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
+            // ZStack for the overlay of background and content
             ZStack {
-                // Background color
+                // Background
                 Color.gray
                     .opacity(0.1)
                     .ignoresSafeArea()
+                // Content
                 ScrollView {
-                    // Four columns from columns array for the grid
-                    LazyVGrid(columns: columns, spacing: 30) {
-                        // Set of cards for the single speeches
-                        ForEach(speechesVM.data) { speech in
-                            // Card to Speech navigation
-                            NavigationLink{
-                                TextSpeechView(actualSpeech: speech)
-                            } label: {
-                                CardView(actualSpeech: speech, remove: speechesVM.removeSpeech)
+                    if(speeches.isEmpty){
+                        Text("No speeches found, click on the plus button to add one")
+                            .font(.subheadline)
+                            .padding()
+                            .foregroundStyle(.gray)
+                    } else {
+                        // Vertical grid where there'll be Speech cards
+                        LazyVGrid(columns: columns, spacing: 30) {
+                            // Set of cards for the single speeches
+                            ForEach(speeches) { speech in
+                                // Card to Speech navigation
+                                NavigationLink{
+                                    TextSpeechView(actualSpeech: speech)
+                                } label: {
+                                    CardView(actualSpeech: speech, remove: context.delete)
+                                }
+                                // Michele was right, there's an overlay removed by this modifier
+                                .buttonStyle(PlainButtonStyle())
                             }
-                            // Michele was right, there's an overlay removed by this modifier
-                            .buttonStyle(PlainButtonStyle())
                         }
-                    }
-                    .padding()
+                        .padding()  // TODO: CHECK WHAT IT DOES
+                }
                 }
                 .navigationTitle("Home")
-                //modal to speechView
+                // Modal to New speech
                 .sheet(isPresented: $showModal, content: {
-                    NewSpeechView(showModal: $showModal, add: speechesVM.addSpeech (_:))
+                    NewSpeechView(showModal: $showModal, add: context.insert)
                 })
-                // Toolbar for the add button
+                // Toolbar for the add button in the top Trailing corner
                 .toolbar {
-                    ToolbarItem {
+                    ToolbarItem (placement: .topBarTrailing) {
                         Button {
                             showModal.toggle()
                         } label: {
@@ -61,9 +72,4 @@ struct HomeView: View {
             }
         }
     }
-}
-
-#Preview {
-    HomeView()
-        .environment(SpeechViewModel())
 }

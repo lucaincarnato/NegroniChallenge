@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		428636932CF922850023670F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 428636922CF922850023670F /* Localizable.xcstrings */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		428636922CF922850023670F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		42E75E822CD8EC22006B36F7 /* NegroniChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NegroniChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -45,6 +50,7 @@
 		42E75E792CD8EC22006B36F7 = {
 			isa = PBXGroup;
 			children = (
+				428636922CF922850023670F /* Localizable.xcstrings */,
 				42E75E842CD8EC22006B36F7 /* NegroniChallenge */,
 				42E75E832CD8EC22006B36F7 /* Products */,
 			);
@@ -98,12 +104,13 @@
 					};
 				};
 			};
-			buildConfigurationList = 42E75E7D2CD8EC22006B36F7 /* Build configuration list for PBXProject "NegroniChallenge" */;
+			buildConfigurationList = 42E75E7D2CD8EC22006B36F7 /* Build configuration list for PBXProject "Speechit" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				it,
 			);
 			mainGroup = 42E75E792CD8EC22006B36F7;
 			minimizedProjectReferenceProxies = 1;
@@ -124,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				428636932CF922850023670F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +207,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -255,6 +264,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -272,7 +282,7 @@
 				EXCLUDE_SOURCE_FILE_NAMES = "NegroniChallenge/NoCompile/*";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NegroniChallenge/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Hear-Me";
+				INFOPLIST_KEY_CFBundleDisplayName = Speechit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App perm to record audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -310,7 +320,7 @@
 				EXCLUDE_SOURCE_FILE_NAMES = "NegroniChallenge/NoCompile/*";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NegroniChallenge/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Hear-Me";
+				INFOPLIST_KEY_CFBundleDisplayName = Speechit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App perm to record audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -338,7 +348,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		42E75E7D2CD8EC22006B36F7 /* Build configuration list for PBXProject "NegroniChallenge" */ = {
+		42E75E7D2CD8EC22006B36F7 /* Build configuration list for PBXProject "Speechit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42E75E8E2CD8EC23006B36F7 /* Debug */,

@@ -8,18 +8,24 @@
 import SwiftUI
 
 struct EditTextView: View {
-    @Environment(SpeechViewModel.self) var speechesVM
+    // Speech speech starting point
+    @Binding var actualSpeech: Speech
+    // Boolean variable for modality
     @Binding var showModal: Bool
-    @Binding var actualSpeech: SpeechModel
+    // Integer to direct edit mode
     @State var editMode: Int = 0
     
     var body: some View {
         NavigationStack{
+            // ZStack for the overlay of background and content
             ZStack{
+                // Background
                 Color.gray
                     .opacity(0.1)
                     .ignoresSafeArea()
+                // Content
                 VStack{
+                    // Select and redirect the correct edit mode
                     Picker("", selection: $editMode){
                         Text("Edit text").tag(0)
                         Text("Edit subtext").tag(1)
@@ -36,9 +42,9 @@ struct EditTextView: View {
                     }
                 }
                 .padding()
-                .navigationTitle(actualSpeech.speechTitle)
+                .navigationTitle(actualSpeech.title)
                 .navigationBarTitleDisplayMode(.inline)
-                // Goes into edit mode
+                // Toolbar to save and cancel actions
                 .toolbar{
                     ToolbarItem(placement: .cancellationAction){
                         Button("Cancel", action: {
@@ -56,16 +62,21 @@ struct EditTextView: View {
     }
 }
 
+// Edits only the text
 struct EditTextMode : View {
-    @Binding var actualSpeech: SpeechModel
+    // Speech speech starting point
+    @Binding var actualSpeech: Speech
     
     var body: some View {
+        // ZStack for the overlay of background and content
         ZStack {
+            // Background
             Rectangle()
                 .fill(Color.white)
                 .cornerRadius(15)
                 .padding()
-            TextEditor(text: $actualSpeech.speechText)
+            // Content
+            TextEditor(text: $actualSpeech.text)
                 .padding(30)
                 .frame(alignment: .topLeading)
                 .font(.title)
@@ -73,20 +84,28 @@ struct EditTextMode : View {
     }
 }
 
+// Edits only the subtext
 struct EditSubtextMode : View {
-    @Binding var actualSpeech: SpeechModel
+    // Speech speech starting point
+    @Binding var actualSpeech: Speech
+    // Default subtext SF symbols
     let dragItems = ["space", "base.unit", "arrow.up", "arrow.down"]
     
     var body: some View {
         VStack{
+            // ZStack for the overlay of background and content related to the speech text
             ZStack {
+                // Background
                 Rectangle()
                     .fill(Color.white)
                     .cornerRadius(15)
+                // Content
                 ScrollView{
+                    // Vertical grid where there'll be Speech words cards
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 130))], spacing: 10) {
                         // It creates unique ids for each word so that the ForEach can show it even if there's many occurrences of the same word
-                        let words = Array(zip(actualSpeech.speechText.components(separatedBy: .whitespacesAndNewlines).indices, actualSpeech.speechText.components(separatedBy: .whitespacesAndNewlines)))
+                        let words = Array(zip(actualSpeech.text.components(separatedBy: .whitespacesAndNewlines).indices, actualSpeech.text.components(separatedBy: .whitespacesAndNewlines)))
+                        // Each single word card
                         ForEach(words, id: \.0) { _, word in
                             ZStack {
                                 Rectangle()
@@ -103,13 +122,17 @@ struct EditSubtextMode : View {
                 }
             }
             .padding()
+            // ZStack for the overlay of background and content related to the subtext elements
             ZStack{
+                // Background
                 Rectangle()
                     .fill(Color.white)
                     .cornerRadius(15)
                     .frame(maxHeight: 100)
                     .padding()
+                // Color
                 HStack{
+                    // Each single subtext card
                     ForEach(dragItems, id:\.self) { symbol in
                         ZStack {
                             Rectangle()
@@ -126,6 +149,7 @@ struct EditSubtextMode : View {
     }
 }
 
+// Default view showed when error occurs
 struct EditDefaultMode : View {
     var body: some View{
         Text("Something went wrong")
