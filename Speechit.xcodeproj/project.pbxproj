@@ -16,7 +16,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		4218864C2CEB32EA00AB86A1 /* Exceptions for "NegroniChallenge" folder in "NegroniChallenge" target */ = {
+		4218864C2CEB32EA00AB86A1 /* Exceptions for "Speechit" folder in "NegroniChallenge" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -26,12 +26,12 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		42E75E842CD8EC22006B36F7 /* NegroniChallenge */ = {
+		42E75E842CD8EC22006B36F7 /* Speechit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				4218864C2CEB32EA00AB86A1 /* Exceptions for "NegroniChallenge" folder in "NegroniChallenge" target */,
+				4218864C2CEB32EA00AB86A1 /* Exceptions for "Speechit" folder in "NegroniChallenge" target */,
 			);
-			path = NegroniChallenge;
+			path = Speechit;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -51,7 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				428636922CF922850023670F /* Localizable.xcstrings */,
-				42E75E842CD8EC22006B36F7 /* NegroniChallenge */,
+				42E75E842CD8EC22006B36F7 /* Speechit */,
 				42E75E832CD8EC22006B36F7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,7 +80,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				42E75E842CD8EC22006B36F7 /* NegroniChallenge */,
+				42E75E842CD8EC22006B36F7 /* Speechit */,
 			);
 			name = NegroniChallenge;
 			packageProductDependencies = (
@@ -297,7 +297,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.coffeebreak.NegroniChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coffeebreak.Speechit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -335,7 +335,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.coffeebreak.NegroniChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coffeebreak.Speechit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
