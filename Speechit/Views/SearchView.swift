@@ -36,7 +36,8 @@ struct SearchView: View {
                 Color.gray
                     .opacity(0.1)
                     .ignoresSafeArea()
-                // Content
+                
+                // Search results
                 ScrollView{
                     // If the search returns no item, it is shown a "no founds" texts
                     if filteredSpeech.isEmpty && !searchText.isEmpty {
@@ -44,16 +45,52 @@ struct SearchView: View {
                             .font(.subheadline)
                             .padding()
                             .foregroundStyle(.gray)
-                    // If the search returns an array of items, it shows it
+                        // If the search returns an array of items, it shows it
                     } else {
                         // Vertical grid where there'll be Speech cards
                         LazyVGrid(columns: columns, spacing: 30) {
                             // Card for the single speech
                             ForEach(filteredSpeech){ speech in
-                                CardView(actualSpeech: speech, remove: context.delete)
+                                NavigationLink{
+                                    TextSpeechView(actualSpeech: speech)
+                                } label: {
+                                    CardView(actualSpeech: speech, remove: context.delete)
+                                }
+                                // Michele was right, there's an overlay removed by this modifier
+                                .buttonStyle(PlainButtonStyle())
+                                // Set to searched when the user taps on the speech and goes into navigation
+                                .simultaneousGesture(TapGesture().onEnded {
+                                    speech.searched.toggle()
+                                })
                             }
                         }
                         .padding()
+                    }
+                    // History
+                    Section{
+                        Text("HISTORY")
+                            .font(.subheadline)
+                            .padding(.horizontal, 20)
+                            .foregroundStyle(Color.gray)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        ScrollView{
+                            // Vertical grid where there'll be searched Speech cards
+                            LazyVGrid(columns: columns, spacing: 30) {
+                                // Card for the single speech
+                                ForEach(speeches){ speech in
+                                    if(speech.searched){
+                                        NavigationLink{
+                                            TextSpeechView(actualSpeech: speech)
+                                        } label: {
+                                            CardView(actualSpeech: speech, remove: context.delete)
+                                        }
+                                        // Michele was right, there's an overlay removed by this modifier
+                                        .buttonStyle(PlainButtonStyle())
+                                    }
+                                }
+                            }
+                            .padding()
+                        }
                     }
                 }
             }

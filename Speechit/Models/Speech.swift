@@ -45,6 +45,9 @@ class Speech: Identifiable{
     // Previous rehearsals
     var rehearsals: [Rehearsal] = []
     
+    // Boolean variable for the history
+    var searched: Bool = false
+    
     // Initializer for minimum requirements
     init(_ title: String, _ color: Color, _ date: Date){
         self.title = title

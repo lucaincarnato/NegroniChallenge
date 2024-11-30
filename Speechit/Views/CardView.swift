@@ -39,8 +39,9 @@ struct CardView: View {
                 .opacity(0.5)
                 .padding(10)
         }
-        // Card's height is fixed, the width depends on the device
-        .frame(height: 250)
+        // Card's dimension
+        // TODO: SEE IF ON OTHER SIZES IT CHANGES SOMETHING
+        .frame(width: 250, height: 250)
         // Creates the txt file when the card appears
         .onAppear {
             createTextFile()
@@ -80,8 +81,4 @@ struct CardView: View {
             print("Error while creating the file \(error)")
         }
     }
-}
-
-#Preview {
-    CardView(actualSpeech: Speech("La marionetta", .red, Date.now), remove: {speech in })
 }
