@@ -13,7 +13,7 @@ import SwiftData
 class Rehearsal: Identifiable{
     var id: UUID = UUID()
     @Attribute(.unique) var fileURL: URL // Required
-    var title: String
+    var title: String = "SpeechitRehearsal"
     var dateOfRehearsal: Date = Date.now
     var transcription: String = ""
     
@@ -21,13 +21,13 @@ class Rehearsal: Identifiable{
     init(_ fileURL: URL){
         self.fileURL = fileURL
         self.dateOfRehearsal = Date.now
-        self.title = fileURL.absoluteString
+        self.title = fileURL.lastPathComponent
     }
     
     // Initializer for custom title
-    init(_ fileURL: URL, _ title: String){
+    init(_ fileURL: URL, _ transcription: String){
         self.fileURL = fileURL
         self.dateOfRehearsal = Date.now
-        self.title = title
+        self.transcription = transcription
     }
 }

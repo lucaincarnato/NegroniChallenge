@@ -555,6 +555,9 @@
         }
       }
     },
+    "Alert Title!" : {
+
+    },
     "Cancel" : {
       "localizations" : {
         "de" : {
@@ -709,6 +712,7 @@
       }
     },
     "Creazione file in corso..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1234,7 +1238,11 @@
         }
       }
     },
+    "Enter channel name" : {
+
+    },
     "File di testo" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2068,6 +2076,7 @@
       }
     },
     "Previous rehearsal" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2138,6 +2147,7 @@
       }
     },
     "Rehearse" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2855,6 +2865,12 @@
         }
       }
     },
+    "Start rehearsal" : {
+
+    },
+    "Stop rehearsal" : {
+
+    },
     "Subtext" : {
       "localizations" : {
         "de" : {
@@ -3066,7 +3082,6 @@
       }
     },
     "Text file" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -3207,6 +3222,7 @@
       }
     },
     "Voice Recorder" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

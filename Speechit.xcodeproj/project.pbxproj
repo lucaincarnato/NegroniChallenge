@@ -287,6 +287,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Speechit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App perm to record audio";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "App perm to transcribe audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -325,6 +326,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Speechit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App perm to record audio";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "App perm to transcribe audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

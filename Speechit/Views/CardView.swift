@@ -23,7 +23,7 @@ struct CardView: View {
                 Text(actualSpeech.title)
                     .bold()
                     .font(.title2)
-                    .frame(maxHeight: 100, alignment: .center)
+                    .frame(maxHeight: 80, alignment: .center)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 20)
                 Text(actualSpeech.date.formatted(date: .numeric, time: .shortened))
@@ -31,7 +31,7 @@ struct CardView: View {
                     Image(systemName: "person.fill")
                     Text("\(actualSpeech.numberOfPeople)")
                 }
-                .padding([.top], 5)
+                .padding(.vertical, 5)
             }
             // Background
             RoundedRectangle(cornerRadius:15)
@@ -39,9 +39,8 @@ struct CardView: View {
                 .opacity(0.5)
                 .padding(10)
         }
-        // Card's dimension
         // TODO: SEE IF ON OTHER SIZES IT CHANGES SOMETHING
-        .frame(width: 250, height: 250)
+        .frame(height: 250)
         // Creates the txt file when the card appears
         .onAppear {
             createTextFile()
@@ -57,10 +56,10 @@ struct CardView: View {
             // Share
             if let fileURL = fileURL {
                 // ShareLink with the txt file already created
-                ShareLink(item: fileURL, preview: SharePreview("File di testo"))
+                ShareLink(item: fileURL, preview: SharePreview("Text file"))
                     .padding()
             } else {
-                Text("Creazione file in corso...")
+                Text("Creating file...")
             }
         }
     }

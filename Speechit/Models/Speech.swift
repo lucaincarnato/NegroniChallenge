@@ -80,7 +80,6 @@ class Speech: Identifiable{
     
     // Returns SwiftUI Color from simulated color
     func getColor() -> Color{
-        print(Color(red: self.red, green: self.green, blue: self.blue, opacity: self.alpha))
         return Color(red: self.red, green: self.green, blue: self.blue, opacity: self.alpha)
     }
     

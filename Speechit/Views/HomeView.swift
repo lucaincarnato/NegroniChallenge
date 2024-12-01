@@ -15,10 +15,10 @@ struct HomeView: View {
     @State private var showModal = false
     // Describes how many columns and how they act in the grid
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(minimum: 150, maximum: 250)),
+        GridItem(.flexible(minimum: 150, maximum: 250)),
+        GridItem(.flexible(minimum: 150, maximum: 250)),
+        GridItem(.flexible(minimum: 150, maximum: 250))
     ]
     
     var body: some View {
@@ -51,7 +51,7 @@ struct HomeView: View {
                                 .buttonStyle(PlainButtonStyle())
                             }
                         }
-                        .padding()  // TODO: CHECK WHAT IT DOES
+                        .padding()
                 }
                 }
                 .navigationTitle("Home")

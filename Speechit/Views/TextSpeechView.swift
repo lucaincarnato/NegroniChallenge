@@ -18,6 +18,12 @@ struct TextSpeechView : View {
     // Boolean variables for the modality
     @State private var editModal = false
     @State private var infoModal = false
+    // Manager for recording and speech recognition
+    @StateObject private var rehearsalManager: RehearsalManager = RehearsalManager()
+    // Shows alert for custom recording's name
+    @State private var showAlert = false
+    // Custom recording's name
+    @State private var customName = ""
     
     var body: some View {
         NavigationStack {
@@ -87,9 +93,17 @@ struct TextSpeechView : View {
                             .disabled(!textActivator)
                     }
                     .padding(.horizontal, 250)
-                    // TODO: LIST OF RECORDINGS
-                    VStack {}
-                    .scrollContentBackground(.hidden)
+                    // List of recording
+                    VStack{
+                        List(actualSpeech.rehearsals, id: \.self) { rehearsal in
+                            // TODO: CHANGE BUTTON THAT PLAYS TO NAVIGATIONLINK TO FEEDBACK (WHERE USER WILL BE ABLE TO PLAY RECORDING)
+                            Button{
+                                rehearsalManager.playRecording(rehearsal.fileURL)
+                            } label: {
+                                Text("\(rehearsal.fileURL.lastPathComponent)")
+                            }
+                        }
+                    }
                     // Buttons for info and start rehearsal
                     HStack{
                         // Info button
@@ -106,18 +120,42 @@ struct TextSpeechView : View {
                         .tint(.blue)
                         // Rehearsal button
                         Button(action: {
-                            print("CIAO")
+                            // Starts and stop based on recording state
+                            if rehearsalManager.isRecording {
+                                showAlert = true
+                                rehearsalManager.pauseRecording()
+                            } else {
+                                rehearsalManager.startRecording()
+                            }
                         }, label: {
                             HStack {
-                                Image(systemName: "play.fill")
-                                Text("Rehearse")
+                                // Differentiate the button based on recording state
+                                Image(systemName: rehearsalManager.isRecording ? "stop.fill" : "play.fill")
+                                Text(rehearsalManager.isRecording ? "Stop rehearsal" : "Start rehearsal")
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
                             }
                             .padding(.horizontal, 50)
                         })
                         .buttonStyle(.bordered)
                         .controlSize(.large)
                         .buttonBorderShape(.capsule)
-                        .tint(.red)
+                        // Changes button's color based on recroding state
+                        .tint(rehearsalManager.isRecording ? Color.yellow : Color.red)
+                        // Shows an alert to let the user decide a custom name for the recording
+                        .alert("Alert Title!", isPresented: $showAlert) {
+                            TextField(text: $customName) {}
+                            Button("Save") {
+                                if (customName != ""){
+                                    rehearsalManager.stopRecording(customName)
+                                } else {
+                                    rehearsalManager.stopRecording("SpeechitRehearsal")
+                                }
+                            }
+                        } message: {
+                            Text("Enter channel name")
+                        }
                     }
                     .padding(.vertical, 20)
                 }
@@ -141,6 +179,9 @@ struct TextSpeechView : View {
                     }
                 }
             }
+        }
+        .onAppear() {
+            self.rehearsalManager.actualSpeech = self.actualSpeech
         }
     }
 }

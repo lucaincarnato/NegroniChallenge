@@ -13,10 +13,10 @@ struct SearchView: View {
     @Query private var speeches: [Speech]
     // Describes how many columns and how they act in the grid
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(minimum: 150, maximum: 250)),
+        GridItem(.flexible(minimum: 150, maximum: 250)),
+        GridItem(.flexible(minimum: 150, maximum: 250)),
+        GridItem(.flexible(minimum: 150, maximum: 250))
     ]
     // State variable to show the searched text in real time
     @State private var searchText = ""
