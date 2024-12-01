@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import AVFAudio
+import Speech
 
 // TODO: REFACTOR
 class RehearsalManager: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
@@ -76,8 +77,9 @@ class RehearsalManager: NSObject, ObservableObject, AVAudioRecorderDelegate, AVA
         isRecording = false
         // Assign custom name to recording's name buffer
         recordingName = customName
-        // Creates a new Rehearsal in the actual speech with the renamed Url
-        actualSpeech?.rehearsals.append(Rehearsal(renameRecording(customName)))
+        // Creates a Rehearsal object and translate the text
+        let rehearsal = Rehearsal(renameRecording(customName))
+        transcribeRecording(rehearsal.fileURL, rehearsal)
     }
     
     // Pauses the recording of user's rehearsal
@@ -103,6 +105,36 @@ class RehearsalManager: NSObject, ObservableObject, AVAudioRecorderDelegate, AVA
         // MARK: BAD PRACTICE, UNWRAPPING bufferURL
     }
     
+    // Transcribe rehearsal's recording and update its transcription
+    func transcribeRecording(_ url: URL, _ rehearsal: Rehearsal) {
+        // Instantiate a new Speech Recognizer with the device default language
+        let speechRecognizer = SFSpeechRecognizer()
+        // Get or request the authorization
+        guard SFSpeechRecognizer.authorizationStatus() == .authorized else {
+            SFSpeechRecognizer.requestAuthorization { status in
+                if status != .authorized {
+                    print("Speech recognition not authorized")
+                }
+            }
+            return
+        }
+        // Instantiate and set up the request to recognize speech in the recorded audio file
+        let recognitionRequest = SFSpeechURLRecognitionRequest(url: url)
+        recognitionRequest.shouldReportPartialResults = false // Return also intermediate results
+        recognitionRequest.requiresOnDeviceRecognition = false // Send data into the network to transcribe
+        recognitionRequest.taskHint = .dictation // Type of speech recognition
+        // Start recognition task
+        speechRecognizer?.recognitionTask(with: recognitionRequest) { result, error in
+            if let result = result {
+                // Associates transcription to rehearsal if results are present
+                rehearsal.transcription = result.bestTranscription.formattedString
+                self.actualSpeech?.rehearsals.append(rehearsal)
+            } else if let error = error {
+                print("Transcription error: \(error.localizedDescription)")
+            }
+        }
+    }
+
     // Plays user's rehearsal
     func playRecording(_ url: URL) {
         // Exception handling

@@ -9,48 +9,58 @@ import SwiftUI
 
 struct FeedbackView: View {
     // Variables for the two text that will be checked
-    @State var speechText: String
-    @State var transcription: String
+    @State var actualSpeech: Speech
+    @State var actualRehearsal: Rehearsal
     
     var body: some View {
-        // VStack for the placement of the two text boxes
-        VStack{
-            // ZStack for the overlay of background and content
-            ZStack {
-                // Background
-                Color.gray
-                    .opacity(0.1)
-                    .ignoresSafeArea()
-                // Content
-                VStack{
-                    // Speech text box
-                    ZStack {
-                        Rectangle()
-                            .fill(Color.white)
-                            .cornerRadius(15)
-                        ScrollView{
-                            Text(speechText)
-                                .padding(20)
-                                .frame(maxWidth: .infinity, alignment: .topLeading)
-                                .font(.title)
+        NavigationStack{
+            // VStack for the placement of the two text boxes
+            VStack{
+                // Button that allows recording's playback 
+                Button{
+                    let rehearsalManager = RehearsalManager()
+                    rehearsalManager.playRecording(actualRehearsal.fileURL)
+                } label: {
+                    Text("\(actualRehearsal.fileURL.lastPathComponent)")
+                }
+                // ZStack for the overlay of background and content
+                ZStack {
+                    // Background
+                    Color.gray
+                        .opacity(0.1)
+                        .ignoresSafeArea()
+                    // Content
+                    VStack{
+                        // Speech text box
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.white)
+                                .cornerRadius(15)
+                            ScrollView{
+                                Text(actualSpeech.text)
+                                    .padding(20)
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    .font(.title)
+                            }
                         }
-                    }
-                    .padding()
-                    // Transcription text box
-                    ZStack {
-                        Rectangle()
-                            .fill(Color.white)
-                            .cornerRadius(15)
-                        ScrollView{
-                            Text(transcription)
-                                .padding(20)
-                                .frame(maxWidth: .infinity, alignment: .topLeading)
-                                .font(.title)
+                        .padding()
+                        // Transcription text box
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.white)
+                                .cornerRadius(15)
+                            ScrollView{
+                                Text(actualRehearsal.transcription)
+                                    .padding(20)
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    .font(.title)
+                            }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
             }
+            .navigationTitle(actualRehearsal.title)
         }
     }
 }

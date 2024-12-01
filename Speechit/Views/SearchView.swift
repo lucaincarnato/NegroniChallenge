@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SearchView: View {
+    // Link to memory in order to retreive data
     @Environment(\.modelContext) private var context
     @Query private var speeches: [Speech]
     // Describes how many columns and how they act in the grid

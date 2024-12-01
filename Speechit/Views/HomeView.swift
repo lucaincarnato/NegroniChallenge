@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
+    // Link to memory in order to retreive data
     @Environment(\.modelContext) private var context
     @Query private var speeches: [Speech]
     // Boolean variable for the modality

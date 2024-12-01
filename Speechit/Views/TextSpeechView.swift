@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftData
 
 struct TextSpeechView : View {
+    // Link to memory in order to retreive data
+    @Environment(\.modelContext) private var context
     // Speech speech starting point
     @State var actualSpeech: Speech
     // Variables to differentiate the mode of rehearsing
@@ -96,9 +98,9 @@ struct TextSpeechView : View {
                     // List of recording
                     VStack{
                         List(actualSpeech.rehearsals, id: \.self) { rehearsal in
-                            // TODO: CHANGE BUTTON THAT PLAYS TO NAVIGATIONLINK TO FEEDBACK (WHERE USER WILL BE ABLE TO PLAY RECORDING)
-                            Button{
-                                rehearsalManager.playRecording(rehearsal.fileURL)
+                            // Navigation to the feedback
+                            NavigationLink{
+                                FeedbackView(actualSpeech: actualSpeech, actualRehearsal: rehearsal)
                             } label: {
                                 Text("\(rehearsal.fileURL.lastPathComponent)")
                             }
@@ -127,6 +129,8 @@ struct TextSpeechView : View {
                             } else {
                                 rehearsalManager.startRecording()
                             }
+                            // Saves the changes and allows the recording to stay in memory
+                            try? context.save()
                         }, label: {
                             HStack {
                                 // Differentiate the button based on recording state
