@@ -88,4 +88,11 @@ class Speech: Identifiable{
         let colorBuffer = UIColor(color)
         colorBuffer.getRed(&self.red, green: &self.green, blue: &self.blue, alpha: &self.alpha)
     }
+    
+    func separateWords() -> [String]{
+        let words = self.text.components(separatedBy: .whitespacesAndNewlines)
+        return words.map { word in
+            word.trimmingCharacters(in: .punctuationCharacters)
+        }.filter { !$0.isEmpty }
+    }
 }

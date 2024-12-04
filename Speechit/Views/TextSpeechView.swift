@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import WrappingHStack
 import SwiftData
 
 struct TextSpeechView : View {
@@ -50,18 +50,14 @@ struct TextSpeechView : View {
                                     .font(.title)
                             // Displays the subtext only if its toggle and text's is active
                             } else if(subtextActivator) {
-                                LazyVGrid(columns: [GridItem(.adaptive(minimum: 130))], spacing: 10) {
-                                    // It creates unique ids for each word so that the ForEach can show it even if there's many occurrences of the same word
-                                    let words = Array(zip(actualSpeech.text.components(separatedBy: .whitespacesAndNewlines).indices, actualSpeech.text.components(separatedBy: .whitespacesAndNewlines)))
-                                    ForEach(words, id: \.0) { _, word in
-                                        ZStack {
-                                            Rectangle()
-                                                .fill(Color.gray)
-                                                .opacity(0.3)
-                                                .frame(width: 130, height: 40)
-                                                .cornerRadius(10)
-                                            Text(word)
-                                        }
+                                // Dynamic HStack where there'll be Speech words cards
+                                WrappingHStack {
+                                    // Each single word card
+                                    ForEach(actualSpeech.separateWords(), id:\.self) {word in
+                                        Label(word, systemImage: "function")
+                                            .labelStyle(.titleOnly)
+                                            .padding()
+                                            .background(Color.gray.opacity(0.3), in: RoundedRectangle(cornerRadius: 15))
                                     }
                                 }
                                 .frame(maxWidth: .infinity)
@@ -104,6 +100,7 @@ struct TextSpeechView : View {
                             } label: {
                                 Text("\(rehearsal.fileURL.lastPathComponent)")
                             }
+                            // MARK: Save context
                         }
                     }
                     // Buttons for info and start rehearsal
@@ -156,6 +153,7 @@ struct TextSpeechView : View {
                                 } else {
                                     rehearsalManager.stopRecording("SpeechitRehearsal")
                                 }
+                                customName = ""
                             }
                         } message: {
                             Text("Enter channel name")

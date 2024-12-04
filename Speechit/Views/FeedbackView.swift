@@ -16,13 +16,6 @@ struct FeedbackView: View {
         NavigationStack{
             // VStack for the placement of the two text boxes
             VStack{
-                // Button that allows recording's playback 
-                Button{
-                    let rehearsalManager = RehearsalManager()
-                    rehearsalManager.playRecording(actualRehearsal.fileURL)
-                } label: {
-                    Text("\(actualRehearsal.fileURL.lastPathComponent)")
-                }
                 // ZStack for the overlay of background and content
                 ZStack {
                     // Background
@@ -31,6 +24,14 @@ struct FeedbackView: View {
                         .ignoresSafeArea()
                     // Content
                     VStack{
+                        // Button that allows recording's playback
+                        Button{
+                            let rehearsalManager = RehearsalManager()
+                            rehearsalManager.playRecording(actualRehearsal.fileURL)
+                        } label: {
+                            Text("\(actualRehearsal.fileURL.lastPathComponent)")
+                        }
+                        .buttonStyle(.bordered)
                         // Speech text box
                         ZStack {
                             Rectangle()

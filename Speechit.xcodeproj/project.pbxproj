@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		428636932CF922850023670F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 428636922CF922850023670F /* Localizable.xcstrings */; };
+		42FCDF0B2D00CF0800CB8714 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 42FCDF0A2D00CF0800CB8714 /* WrappingHStack */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42FCDF0B2D00CF0800CB8714 /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			);
 			name = Speechit;
 			packageProductDependencies = (
+				42FCDF0A2D00CF0800CB8714 /* WrappingHStack */,
 			);
 			productName = NegroniChallenge;
 			productReference = 42E75E822CD8EC22006B36F7 /* Speechit.app */;
@@ -117,6 +120,7 @@
 			mainGroup = 42E75E792CD8EC22006B36F7;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				42FCDF092D00CF0800CB8714 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 42E75E832CD8EC22006B36F7 /* Products */;
@@ -286,8 +290,8 @@
 				INFOPLIST_FILE = Speechit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Speechit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App perm to record audio";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "App perm to transcribe audio";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need permission to record audio";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Need permission to transcribe audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -325,8 +329,8 @@
 				INFOPLIST_FILE = Speechit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Speechit;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App perm to record audio";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "App perm to transcribe audio";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need permission to record audio";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Need permission to transcribe audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -371,6 +375,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		42FCDF092D00CF0800CB8714 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		42FCDF0A2D00CF0800CB8714 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42FCDF092D00CF0800CB8714 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42E75E7A2CD8EC22006B36F7 /* Project object */;
 }

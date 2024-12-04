@@ -78,7 +78,7 @@ class RehearsalManager: NSObject, ObservableObject, AVAudioRecorderDelegate, AVA
         // Assign custom name to recording's name buffer
         recordingName = customName
         // Creates a Rehearsal object and translate the text
-        let rehearsal = Rehearsal(renameRecording(customName))
+        let rehearsal = Rehearsal(customName, renameRecording(customName))
         transcribeRecording(rehearsal.fileURL, rehearsal)
     }
     

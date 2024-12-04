@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TextInfoView: View {
+    // Link to memory in order to retreive data
+    @Environment(\.modelContext) private var context
     // Speech speech starting point
     @State var actualSpeech: Speech
     // Placeholder for the color
@@ -124,6 +126,7 @@ struct TextInfoView: View {
                         Button("Save"){
                             // The color isn't directly connected to the object for simulation purposes
                             actualSpeech.setColor(color)
+                            try? context.save()
                             editMode.toggle()
                         }
                     }

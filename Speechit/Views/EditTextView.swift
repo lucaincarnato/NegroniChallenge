@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
 struct EditTextView: View {
+    // Link to memory in order to retreive data
+    @Environment(\.modelContext) private var context
     // Speech speech starting point
     @Binding var actualSpeech: Speech
     // Boolean variable for modality
@@ -54,6 +57,7 @@ struct EditTextView: View {
                     ToolbarItem(placement: .topBarTrailing){
                         Button("Save", action: {
                             showModal.toggle()
+                            try? context.save()
                         })
                     }
                 }
@@ -101,23 +105,17 @@ struct EditSubtextMode : View {
                     .cornerRadius(15)
                 // Content
                 ScrollView{
-                    // Vertical grid where there'll be Speech words cards
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 130))], spacing: 10) {
-                        // It creates unique ids for each word so that the ForEach can show it even if there's many occurrences of the same word
-                        let words = Array(zip(actualSpeech.text.components(separatedBy: .whitespacesAndNewlines).indices, actualSpeech.text.components(separatedBy: .whitespacesAndNewlines)))
+                    // Dynamic HStack where there'll be Speech words cards
+                    WrappingHStack {
                         // Each single word card
-                        ForEach(words, id: \.0) { _, word in
-                            ZStack {
-                                Rectangle()
-                                    .fill(Color.gray)
-                                    .opacity(0.3)
-                                    .frame(width: 130, height: 40)
-                                    .cornerRadius(10)
-                                Text(word)
-                            }
+                        ForEach(actualSpeech.separateWords(), id:\.self) {word in
+                            Label(word, systemImage: "function")
+                                .labelStyle(.titleOnly)
+                                .padding()
+                                .background(Color.gray.opacity(0.3), in: RoundedRectangle(cornerRadius: 15))
                         }
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(maxHeight: .infinity)
                     .padding(20)
                 }
             }
@@ -134,14 +132,11 @@ struct EditSubtextMode : View {
                 HStack{
                     // Each single subtext card
                     ForEach(dragItems, id:\.self) { symbol in
-                        ZStack {
-                            Rectangle()
-                                .fill(Color.red)
-                                .frame(width: 90, height: 40)
-                                .cornerRadius(10)
-                            Image(systemName: symbol)
-                                .foregroundStyle(Color.white)
-                        }
+                        Label("Michele Parocazz", systemImage: symbol)
+                            .labelStyle(.iconOnly)
+                            .foregroundStyle(Color.white)
+                            .padding()
+                            .background(Color.red, in: RoundedRectangle(cornerRadius: 15))
                     }
                 }
             }

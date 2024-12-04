@@ -59,6 +59,7 @@ struct SearchView: View {
                                 }
                                 // Michele was right, there's an overlay removed by this modifier
                                 .buttonStyle(PlainButtonStyle())
+                                .opacity(0.5)
                                 // Set to searched when the user taps on the speech and goes into navigation
                                 .simultaneousGesture(TapGesture().onEnded {
                                     speech.searched.toggle()

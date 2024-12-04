@@ -25,6 +25,13 @@ class Rehearsal: Identifiable{
     }
     
     // Initializer for custom title
+    init(_ title: String, _ fileURL: URL){
+        self.fileURL = fileURL
+        self.dateOfRehearsal = Date.now
+        self.title = title
+    }
+    
+    // Initializer for custom transcription
     init(_ fileURL: URL, _ transcription: String){
         self.fileURL = fileURL
         self.dateOfRehearsal = Date.now
